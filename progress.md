@@ -5989,3 +5989,16 @@
     - Configured `.cluster-card-body` with `display: flex; flex-direction: column; justify-content: space-between; gap: 12px; width: 100%; box-sizing: border-box;`.
     - Button `.btn-cluster-explore` stretches 100% across card margin-to-margin (`align-self: stretch !important;`).
 - **Status**: Completed & Verified.
+
+---
+
+### [2026-11-24] Progress #129: Stretch Subpage Navbar Pill Tabs Auto-Layout Edge-to-Edge to Margins
+- **Context & Objective**: Per user screenshot (`media_1795491649093_59a6a5c3.png`) and request ("buat jadi auto layout sampai ke margin"), expand the segmented pill tabs in the navbar (Fasilitas, Unit, and Masterplan) so that the pill container stretches all the way to the header margins with equal proportional auto-layout tab distribution.
+- **Key Changes Implemented**:
+  - **Container Fill Auto-Layout (`styles.css`)**:
+    - Configured `.fasilitas-subpage-pills`, `#unitClusterTabs`, and `#siteplanClusterTabs` with `width: 100% !important; max-width: 100% !important; align-self: stretch !important; justify-content: space-between !important; margin: 0 !important;` to span from left to right padding margin.
+  - **Equal Proportional Tab Distribution (`styles.css`)**:
+    - Set `.f-sub-pill` and `.fasilitas-sub-pill` to `flex: 1 1 0 !important; min-width: 0 !important; height: 28px !important; text-align: center !important; justify-content: center !important;`.
+    - Maintained active tab solid white pill state (`background: #ffffff; color: #11332a; font-weight: 700;`) and soft ivory inactive state (`color: rgba(245, 242, 235, 0.85)`).
+- **Status**: Completed & Verified.
+
