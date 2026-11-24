@@ -6028,5 +6028,22 @@
     - Uniform divider lines (`border-right: 1px solid #eae4d8;`) now segment the card into 4 perfectly balanced quadrants with zero blank trailing space.
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #132: Fix Invisible Secondary Button in Penutup & Fasilitas Footer Cards
+- **Context & Objective**: Per user screenshot (`media_1795497181783_5c8a1b14.png`), resolve blank white button bug next to "Amankan Unit Anda" in the "PENUTUP" card.
+- **Root Cause**:
+  - `.btn-secondary-link` had been included in the master button override setting text color to `#ffffff !important;`, while the local container rule `.f-cta-btns-row .btn-secondary-link` set background to `#ffffff !important;`, causing white-on-white invisible text.
+- **Key Changes Implemented**:
+  - **Secondary Outline Button System (`styles.css`)**:
+    - Removed `.btn-secondary-link` from master dark button override.
+    - Explicitly styled `.btn-secondary-link` and `.f-cta-btns-row .btn-secondary-link` as high-contrast outline buttons: `background: #ffffff !important; border: 1.5px solid #11332a !important; color: #11332a !important; font-weight: 600 !important;`.
+    - Configured child spans, strong tags, and SVGs to inherit `#11332a` dark forest green.
+    - Added subtle hover lift and tint (`background: #f0f7f3 !important; transform: translateY(-1px);`).
+  - **Icon Integration (`index.html`)**:
+    - Integrated clean WhatsApp and calculator SVG icons into secondary CTA buttons across all Fasilitas subpages.
+- **Status**: Completed & Verified.
+
+
 
 

@@ -8193,15 +8193,41 @@ body {
   display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
+  gap: 6px !important;
   white-space: nowrap !important;
   box-sizing: border-box !important;
+  border-radius: 8px !important;
 }
 
 .f-cta-btns-row .btn-secondary-link {
   background: #ffffff !important;
-  border: 1px solid #d4cdc0 !important;
+  border: 1.5px solid #11332a !important;
   color: #11332a !important;
-  border-radius: 8px !important;
+  box-shadow: 0 1px 4px rgba(17, 51, 42, 0.08) !important;
+}
+
+.f-cta-btns-row .btn-secondary-link span,
+.f-cta-btns-row .btn-secondary-link strong {
+  color: #11332a !important;
+  font-weight: 600 !important;
+}
+
+.f-cta-btns-row .btn-secondary-link svg {
+  color: #11332a !important;
+  fill: #11332a !important;
+  stroke: #11332a !important;
+}
+
+.f-cta-btns-row .btn-secondary-link:hover {
+  background: #f0f7f3 !important;
+  border-color: #11332a !important;
+  color: #11332a !important;
+  transform: translateY(-1px) !important;
+}
+
+.f-cta-btns-row .btn-secondary-link:hover span,
+.f-cta-btns-row .btn-secondary-link:hover strong {
+  color: #11332a !important;
 }
 
 /* Super App Triptych */
@@ -14361,7 +14387,6 @@ body {
 .btn-brochure-action,
 .btn-cluster-explore,
 .btn-recom-view,
-.btn-secondary-link,
 .btn-save-custom,
 .btn-save-siteplan,
 .btn-open-door,
@@ -14399,8 +14424,6 @@ body {
 .btn-brochure-action span,
 .btn-cluster-explore span,
 .btn-recom-view span,
-.btn-secondary-link span,
-.btn-secondary-link strong,
 .hospitality-cta-card button span {
   color: #ffffff !important;
 }
@@ -14421,8 +14444,7 @@ body {
 .btn-surat-modal-proceed svg,
 .btn-brochure-action svg,
 .btn-cluster-explore svg,
-.btn-recom-view svg,
-.btn-secondary-link svg {
+.btn-recom-view svg {
   color: #ffffff !important;
   stroke: #ffffff !important;
 }
@@ -14447,7 +14469,6 @@ body {
 .btn-brochure-action:hover,
 .btn-cluster-explore:hover,
 .btn-recom-view:hover,
-.btn-secondary-link:hover,
 .btn-save-custom:hover,
 .btn-save-siteplan:hover,
 .btn-open-door:hover,
@@ -14457,4 +14478,55 @@ body {
   color: #ffffff !important;
   transform: translateY(-1px) !important;
   box-shadow: 0 4px 14px rgba(17, 51, 42, 0.28) !important;
+}
+
+/* Secondary Outline Button System (High-Contrast Forest Green on Clean White) */
+.btn-secondary-link,
+.f-cta-btns-row .btn-secondary-link {
+  background: #ffffff !important;
+  color: #11332a !important;
+  border: 1.5px solid #11332a !important;
+  border-radius: 8px !important;
+  font-family: var(--font-sans) !important;
+  font-weight: 600 !important;
+  box-shadow: 0 1px 4px rgba(17, 51, 42, 0.08) !important;
+  transition: all 0.2s ease !important;
+  cursor: pointer !important;
+  text-decoration: none !important;
+  display: inline-flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  gap: 6px !important;
+  box-sizing: border-box !important;
+}
+
+.btn-secondary-link span,
+.btn-secondary-link strong,
+.f-cta-btns-row .btn-secondary-link span,
+.f-cta-btns-row .btn-secondary-link strong {
+  color: #11332a !important;
+  font-weight: 600 !important;
+}
+
+.btn-secondary-link svg,
+.f-cta-btns-row .btn-secondary-link svg {
+  color: #11332a !important;
+  fill: #11332a !important;
+  stroke: #11332a !important;
+}
+
+.btn-secondary-link:hover,
+.f-cta-btns-row .btn-secondary-link:hover {
+  background: #f0f7f3 !important;
+  border-color: #11332a !important;
+  color: #11332a !important;
+  transform: translateY(-1px) !important;
+  box-shadow: 0 3px 8px rgba(17, 51, 42, 0.14) !important;
+}
+
+.btn-secondary-link:hover span,
+.btn-secondary-link:hover strong,
+.f-cta-btns-row .btn-secondary-link:hover span,
+.f-cta-btns-row .btn-secondary-link:hover strong {
+  color: #11332a !important;
 }
