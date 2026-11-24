@@ -11,7 +11,7 @@
     href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap"
     rel="stylesheet" />
   <link rel="stylesheet" href="assets/leaflet/leaflet.css" />
-  <link rel="stylesheet" href="styles.css" />
+  <link rel="stylesheet" href="styles.css?v=luxury_emerald_3_fullbleed" />
 </head>
 
 <body>
@@ -1278,136 +1278,222 @@
         <div class="landing-content-scroll" id="landingScrollContent">
           <!-- TAB 1: BERANDA -->
           <section class="landing-tab-panel is-active" id="panelBeranda">
-            <!-- 0. TOP CINEMATIC VIDEO BANNER & RUNNING MARQUEE (Full Bleed, Zero Gap) -->
-            <div class="beranda-top-hero-unit">
-              <div class="beranda-top-video-banner" id="berandaTopVideoBanner">
-                <div class="top-video-viewport">
-                  <video id="berandaHeroVideo" class="top-video-player" autoplay muted playsinline preload="auto">
-                    <source src="assets/videos/hero_video_1.mp4" type="video/mp4" />
-                  </video>
-                  <div class="top-video-overlay-gradient"></div>
+            <!-- ========================================================
+                 0. GRAND ARCHITECTURAL ESTATE HERO (Ultra-Luxury Editorial)
+                 ======================================================== -->
+            <header class="beranda-grand-hero openrouter-hero" id="berandaGrandHero">
+              <div class="grand-hero-media-wrap">
+                <img src="assets/townhouse-hero.jpg" alt="The Park Townhouse Japandi Modern Architecture" class="grand-hero-still-img" id="berandaHeroStillImg" />
+                <div class="grand-hero-scrim"></div>
+              </div>
 
-                  <!-- Scene Info & Controls Bar -->
-                  <div class="top-video-info-bar">
-                    <p class="top-video-caption" id="topVideoCaption">Kawasan hunian eksklusif dua lantai diapit
-                      keteduhan
-                      alam dan kemudahan koridor Sukoharjo.</p>
+              <!-- OpenRouter-Style Two-Column Hero Grid -->
+              <div class="openrouter-hero-container">
+                <!-- Left Column: Core Value Proposition & Actions -->
+                <div class="openrouter-hero-left">
+                  <!-- Interactive Quick Search / Command Bar -->
+                  <div class="openrouter-cmd-bar" onclick="focusOpenRouterSearch()">
+                    <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="11" cy="11" r="8"></circle>
+                      <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
+                    </svg>
+                    <input type="text" id="openrouterSearchInput" placeholder="Cari unit, suasana, atau fasilitas..." onkeyup="handleOpenRouterSearch(this.value)" autocomplete="off">
+                    <span class="search-cmd-badge">⌘K</span>
+                  </div>
+
+                  <div class="grand-hero-eyebrow-row">
+                    <span class="quiet-status-dot"></span>
+                    <span class="grand-hero-tag">Hunian Japandi Modern</span>
+                    <span class="grand-hero-divider">·</span>
+                    <span class="grand-hero-location">Jl. Jenderal Sudirman, Sukoharjo</span>
+                  </div>
+
+                  <h1 class="grand-hero-headline">
+                    Ada rumah.<br>
+                    <em class="hero-serif-italic">Ada rasa pulang yang sejati.</em>
+                  </h1>
+
+                  <p class="grand-hero-subline">
+                    Tiga puluh hunian eksklusif dua lantai berarsitektur Japandi Modern. Tempat terbaik meletakkan lelah, merayakan kehangatan keluarga, dan menyambut hari dengan ritme yang lebih selaras di jantung Sukoharjo.
+                  </p>
+
+                  <!-- Curated Luxury Action Buttons -->
+                  <div class="grand-hero-actions">
+                    <button type="button" class="btn-hero-primary" onclick="switchLandingTab('siteplan')">
+                      <span>Eksplorasi 30 kavling</span>
+                      <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M5 12h14M12 5l7 7-7 7"/>
+                      </svg>
+                    </button>
+                    <button type="button" class="btn-hero-secondary" onclick="openOrderModal('Nagoya (Tipe Gold)', 'A.02', '650.000.000')">
+                      <span>Konsultasi privat</span>
+                    </button>
+                  </div>
+
+                  <!-- Architectural Ledger Bar (Soft-Selling Emotional Figures) -->
+                  <div class="grand-hero-ledger" id="berandaMetricsGrid">
+                    <div class="ledger-item">
+                      <span class="ledger-val count-up-stat" data-target="30" data-prefix="" data-suffix=" Unit">30 unit</span>
+                      <span class="ledger-lbl">Keluarga bertetangga</span>
+                    </div>
+                    <div class="ledger-sep"></div>
+                    <div class="ledger-item">
+                      <span class="ledger-val count-up-stat highlight-green" data-target="100" data-prefix="" data-suffix="%">100% SHM</span>
+                      <span class="ledger-lbl">Sertifikat pecah siap AJB</span>
+                    </div>
+                    <div class="ledger-sep"></div>
+                    <div class="ledger-item">
+                      <span class="ledger-val count-up-stat highlight-gold" data-target="177" data-prefix="" data-suffix=" m²">177 m²</span>
+                      <span class="ledger-lbl">Clubhouse &amp; kolam renang</span>
+                    </div>
+                    <div class="ledger-sep"></div>
+                    <div class="ledger-item">
+                      <span class="ledger-val count-up-stat" data-target="24" data-prefix="" data-suffix=" Jam">24 jam</span>
+                      <span class="ledger-lbl">Keamanan terpadu RFID</span>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right Column: Interactive Living Constellation & Estate Orbit Visualizer -->
+                <div class="openrouter-hero-right">
+                  <div class="hero-orbit-stage" id="heroOrbitStage">
+                    <!-- Static Concentric Architectural Rings -->
+                    <div class="orbit-ring orbit-ring-outer"></div>
+                    <div class="orbit-ring orbit-ring-middle"></div>
+                    <div class="orbit-ring orbit-ring-inner"></div>
+
+                    <!-- Center Core Emblem -->
+                    <div class="orbit-center-node" title="The Park Townhouse Central Estate">
+                      <img src="assets/drive/logo-tpt.png" alt="Logo The Park" class="orbit-logo-img">
+                      <span class="orbit-center-label">THE PARK</span>
+                    </div>
+
+                    <!-- Orbiting Interactive Satellite Nodes -->
+                    <!-- Node 1: Klaster Nagoya -->
+                    <div class="orbit-sat-node sat-nagoya" onclick="switchBerandaLotCluster('nagoya'); selectBerandaLot('A.02', 'nagoya'); switchLandingTab('siteplan');" title="Klaster Nagoya · 15 Unit">
+                      <div class="sat-dot"></div>
+                      <div class="sat-card">
+                        <span class="sat-title">Nagoya Gold</span>
+                        <span class="sat-meta">15 unit · LB 75 m²</span>
+                        <strong class="sat-price">Rp 650 jt</strong>
+                      </div>
+                    </div>
+
+                    <!-- Node 2: Klaster Osaka -->
+                    <div class="orbit-sat-node sat-osaka" onclick="switchBerandaLotCluster('osaka'); selectBerandaLot('A.09', 'osaka'); switchLandingTab('siteplan');" title="Klaster Osaka · 7 Unit">
+                      <div class="sat-dot"></div>
+                      <div class="sat-card">
+                        <span class="sat-title">Osaka Diamond</span>
+                        <span class="sat-meta">7 unit · 2 garasi</span>
+                        <strong class="sat-price">Rp 1,15 M</strong>
+                      </div>
+                    </div>
+
+                    <!-- Node 3: Klaster Tokyo -->
+                    <div class="orbit-sat-node sat-tokyo" onclick="switchBerandaLotCluster('tokyo'); selectBerandaLot('B.03', 'tokyo'); switchLandingTab('siteplan');" title="Klaster Tokyo · 8 Unit">
+                      <div class="sat-dot"></div>
+                      <div class="sat-card">
+                        <span class="sat-title">Tokyo Prime</span>
+                        <span class="sat-meta">8 unit · LB 80 m²</span>
+                        <strong class="sat-price">Rp 775 jt</strong>
+                      </div>
+                    </div>
+
+                    <!-- Node 4: Clubhouse Resor -->
+                    <div class="orbit-sat-node sat-clubhouse" onclick="switchLandingTab('Fasilitas')" title="Clubhouse Resor 177 m²">
+                      <div class="sat-dot"></div>
+                      <div class="sat-card">
+                        <span class="sat-title">Clubhouse resor</span>
+                        <span class="sat-meta">Kolam, gym, golf</span>
+                        <strong class="sat-price highlight-green">177 m²</strong>
+                      </div>
+                    </div>
+
+                    <!-- Node 5: Smart One-Gate RFID -->
+                    <div class="orbit-sat-node sat-security" title="One-Gate RFID 24 Jam Active">
+                      <div class="sat-dot"></div>
+                      <div class="sat-card">
+                        <span class="sat-title">One-gate RFID</span>
+                        <span class="sat-meta">Pos 24 jam</span>
+                        <strong class="sat-price highlight-gold">Aktif</strong>
+                      </div>
+                    </div>
                   </div>
                 </div>
               </div>
 
-              <!-- 1. RUNNING ANNOUNCEMENT MARQUEE TICKER -->
-              <div class="marquee-ticker-bar">
-                <div class="marquee-track">
-                  <span>SEBUAH ALAMAT · BEGITU BANYAK ARTI · 30 HUNIAN JAPANDI MODERN · KORIDOR EMAS SUKOHARJO · SHM
-                    PECAH SEMPURNA · RUANG PULANG TEDUH KELUARGA · FASILITAS RESOR EKSKLUSIF · </span>
-                  <span>SEBUAH ALAMAT · BEGITU BANYAK ARTI · 30 HUNIAN JAPANDI MODERN · KORIDOR EMAS SUKOHARJO · SHM
-                    PECAH SEMPURNA · RUANG PULANG TEDUH KELUARGA · FASILITAS RESOR EKSKLUSIF · </span>
-                </div>
-              </div>
-            </div>
-
-            <!-- 2. PRESALE EXCLUSIVE HERO HEADER -->
-            <div class="beranda-hero-box">
-              <div class="hero-top-eyebrow">
-                <span class="eyebrow-pill">SEBUAH RITME PULANG · SUKOHARJO</span>
-              </div>
-              <h1 class="beranda-hero-title">Ada rumah. Ada rasa pulang.</h1>
-              <p class="beranda-hero-sub">
-                Ruang teduh untuk meletakkan lelah, merayakan tawa keluarga, dan menyambut hari dengan ritme yang lebih
-                selaras.
-              </p>
-
-              <!-- 4 Stat Badges Grid with Dynamic Counter Animation -->
-              <div class="beranda-metrics-grid" id="berandaMetricsGrid">
-                <div class="b-metric-cell">
-                  <strong class="count-up-stat" data-target="400" data-prefix="Rp " data-suffix=" Jt">Rp 400 Jt</strong>
-                  <span>Harga Perdana Mulai</span>
-                </div>
-                <div class="b-metric-cell">
-                  <strong class="count-up-stat" data-target="30" data-prefix="" data-suffix=" Unit">30 Unit</strong>
-                  <span>Keluarga Bertetangga</span>
-                </div>
-                <div class="b-metric-cell">
-                  <strong class="count-up-stat" data-target="177" data-prefix="" data-suffix=" m²">177 m²</strong>
-                  <span>Clubhouse Bersama</span>
-                </div>
-                <div class="b-metric-cell">
-                  <strong class="count-up-stat" data-target="100" data-prefix="± " data-suffix=" m">± 100 m</strong>
-                  <span>Ke Gelora Merdeka</span>
-                </div>
-              </div>
-
-              <!-- Compact Cinematic Atmosphere Showcase (Aspect 16:9, max-height 220px) -->
-              <div class="landing-video-card" id="landingVideoCard">
-                <div class="video-viewport-frame" id="videoViewportFrame">
-                  <img src="assets/drive/aerial-drone.jpeg" alt="Sinema The Park Townhouse" class="video-viewport-media"
-                    id="videoDisplayImg" />
-                  <div class="video-overlay-gradient"></div>
-                  <div class="video-caption-bar">
-                    <p class="video-scene-desc" id="videoSceneDesc">Pemandangan udara 30 unit hunian Japandi Modern
-                      diapit keteduhan alam Sukoharjo.</p>
+              <!-- Quiet Ecosystem Trust Ribbon (No Emojis) -->
+              <div class="estate-trust-strip">
+                <div class="trust-strip-inner">
+                  <div class="trust-chip">
+                    <span class="trust-text">SHM pecah per kavling</span>
+                  </div>
+                  <div class="trust-chip">
+                    <span class="trust-text">Bank partner: BTN &amp; BSI Syariah</span>
+                  </div>
+                  <div class="trust-chip">
+                    <span class="trust-text">Arsitektur Japandi modern 2 lantai</span>
+                  </div>
+                  <div class="trust-chip">
+                    <span class="trust-text">Smart one-gate RFID 24 jam</span>
+                  </div>
+                  <div class="trust-chip">
+                    <span class="trust-text">Clubhouse &amp; mini golf 9-hole</span>
+                  </div>
+                  <div class="trust-chip">
+                    <span class="trust-text">ROW jalan 7 meter mutu K-350</span>
                   </div>
                 </div>
               </div>
+            </header>
 
-              <!-- Primary Hero CTA -->
-              <div class="hero-cta-action">
-                <button type="button" class="btn-primary-forest btn-block"
-                  onclick="openOrderModal('Nagoya (Tipe Gold)', 'A.02', '650.000.000')">
-                  <span>Amankan Unit Presale · Booking Rp 5 Juta</span>
-                </button>
-              </div>
-            </div>
-
-            <!-- 3. NILAI LEBIH INVESTASI (4 PILLARS) -->
+            <!-- 3. HARMONI KAWASAN & KETENANGAN HIDUP (Soft Selling) -->
             <div class="landing-section-card">
               <div class="section-card-head">
-                <span class="section-tag-gold">NILAI LEBIH INVESTASI</span>
-                <h2 class="section-card-title">Mengapa The Park Townhouse?</h2>
-                <p class="section-card-sub">Kombinasi langka kenyamanan hidup privat dan akselerasi nilai aset di
-                  koridor utama Sukoharjo.</p>
+                <span class="section-tag-gold">HARMONI KAWASAN</span>
+                <h2 class="section-card-title">Ketenangan yang Dirancang Sempurna</h2>
+                <p class="section-card-sub">Setiap sudut kawasan dirancang untuk menyelaraskan ritme hari Anda — dari langkah pagi yang segar hingga keteduhan saat melangkah pulang.</p>
               </div>
 
               <div class="invest-pillars-grid">
                 <div class="invest-pillar-item">
                   <div class="pillar-img-box">
-                    <img src="assets/drive/aerial-drone.jpeg" alt="30 Unit Terbatas" class="pillar-thumb-img" />
-                    <span class="pillar-num-badge">30 Unit</span>
+                    <img src="assets/drive/aerial-drone.jpeg" alt="Komunitas 30 Keluarga" class="pillar-thumb-img" />
+                    <span class="pillar-num-badge">30 Keluarga</span>
                   </div>
                   <div class="pillar-content">
-                    <div class="pillar-title">Unit Terbatas</div>
-                    <div class="pillar-desc">Privasi dan ketenangan maksimal dalam enclave mandiri Japandi.</div>
+                    <div class="pillar-title">Komunitas Teduh</div>
+                    <div class="pillar-desc">Privasi dan ketenangan maksimal dalam enclave mandiri bertetangga hangat.</div>
                   </div>
                 </div>
                 <div class="invest-pillar-item">
                   <div class="pillar-img-box">
-                    <img src="assets/drive/clubhouse.png" alt="99 Keunggulan Kawasan" class="pillar-thumb-img" />
-                    <span class="pillar-num-badge">99 Nilai</span>
+                    <img src="assets/drive/clubhouse.png" alt="Fasilitas Resor 177 m²" class="pillar-thumb-img" />
+                    <span class="pillar-num-badge">177 m²</span>
                   </div>
                   <div class="pillar-content">
-                    <div class="pillar-title">Keunggulan Kawasan</div>
-                    <div class="pillar-desc">Fasilitas lengkap tanpa biaya keanggotaan terpisah.</div>
+                    <div class="pillar-title">Fasilitas Bersama</div>
+                    <div class="pillar-desc">Clubhouse mandiri, kolam renang, dan ruang rekreasi keluarga eksklusif.</div>
                   </div>
                 </div>
                 <div class="invest-pillar-item">
                   <div class="pillar-img-box">
-                    <img src="assets/drive/gate.png" alt="Capital Gain 18%/Tahun" class="pillar-thumb-img" />
-                    <span class="pillar-num-badge">18%/Thn</span>
+                    <img src="assets/drive/gate.png" alt="Akses Prima Koridor Sukoharjo" class="pillar-thumb-img" />
+                    <span class="pillar-num-badge">Akses Prima</span>
                   </div>
                   <div class="pillar-content">
-                    <div class="pillar-title">Capital Gain/Tahun</div>
-                    <div class="pillar-desc">Pertumbuhan nilai aset properti di koridor emas Jl. Sudirman.</div>
+                    <div class="pillar-title">Koridor Terdepan</div>
+                    <div class="pillar-desc">Dekat fasilitas kota Jl. Sudirman tanpa kehilangan kedamaian di rumah.</div>
                   </div>
                 </div>
                 <div class="invest-pillar-item">
                   <div class="pillar-img-box">
-                    <img src="assets/drive/house.jpeg" alt="Booking Perdana Rp 5 Juta" class="pillar-thumb-img" />
-                    <span class="pillar-num-badge">Rp 5 Jt</span>
+                    <img src="assets/drive/house.jpeg" alt="Legalitas Pasti SHM Pecah" class="pillar-thumb-img" />
+                    <span class="pillar-num-badge">SHM Siap</span>
                   </div>
                   <div class="pillar-content">
-                    <div class="pillar-title">Booking Perdana</div>
-                    <div class="pillar-desc">Kunci kavling impian Anda sebelum penyesuaian harga tahap 2.</div>
+                    <div class="pillar-title">Kepastian Penuh</div>
+                    <div class="pillar-desc">Sertifikat SHM dan perizinan sudah pecah per kavling, siap akad langsung.</div>
                   </div>
                 </div>
               </div>
@@ -1720,279 +1806,513 @@
               </div>
             </div>
 
-            <!-- 4B. UNIT SHOWCASE PER CLUSTER (Preview Carousel & Link ke Halaman Unit) -->
-            <div class="landing-section-card" id="secBerandaUnitShowcase">
+            <!-- 4B. MARKETPLACE MATRIX & UNIT CATALOG (Unslopped) -->
+            <div class="landing-section-card openrouter-marketplace-card" id="secBerandaUnitShowcase">
               <div class="section-card-head">
-                <span class="section-tag-gold">PILIHAN UNIT PER CLUSTER</span>
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                  <span class="section-tag-gold">Koleksi unit &amp; kavling</span>
+                  <span class="or-live-badge">
+                    <span class="quiet-status-dot"></span>
+                    30 unit terdaftar · Presale aktif
+                  </span>
+                </div>
                 <h2 class="section-card-title">Koleksi Hunian Japandi Modern</h2>
-                <p class="section-card-sub">30 unit hunian terkurasi dalam 3 karakter klaster: Nagoya, Tokyo, dan Osaka.
-                  Temukan yang paling selaras bagi keluarga.</p>
+                <p class="section-card-sub">Pilih klaster dan karakter hunian yang paling presisi bagi kebutuhan keluarga Anda.</p>
               </div>
 
-              <!-- Cluster Selector Tabs -->
-              <div class="cluster-pill-tabs" id="berandaShowcaseClusterTabs">
-                <button type="button" class="cluster-pill-btn is-active" id="btnShowcaseNagoya"
-                  onclick="switchBerandaShowcaseCluster('nagoya', this)">
-                  <span>Nagoya (15 Unit)</span>
+              <!-- Filter Tabs with Tabular Counts -->
+              <div class="cluster-pill-tabs or-filter-tabs" id="berandaShowcaseClusterTabs">
+                <button type="button" class="cluster-pill-btn is-active" id="btnShowcaseAll"
+                  onclick="filterOpenRouterUnits('all', this)">
+                  <span>Semua unit (30)</span>
+                </button>
+                <button type="button" class="cluster-pill-btn" id="btnShowcaseNagoya"
+                  onclick="filterOpenRouterUnits('nagoya', this)">
+                  <span>Nagoya (15)</span>
                 </button>
                 <button type="button" class="cluster-pill-btn" id="btnShowcaseTokyo"
-                  onclick="switchBerandaShowcaseCluster('tokyo', this)">
-                  <span>Tokyo (7 Unit)</span>
+                  onclick="filterOpenRouterUnits('tokyo', this)">
+                  <span>Tokyo (8)</span>
                 </button>
                 <button type="button" class="cluster-pill-btn" id="btnShowcaseOsaka"
-                  onclick="switchBerandaShowcaseCluster('osaka', this)">
-                  <span>Osaka (9 Unit)</span>
+                  onclick="filterOpenRouterUnits('osaka', this)">
+                  <span>Osaka (7)</span>
+                </button>
+                <button type="button" class="cluster-pill-btn" id="btnShowcaseClub"
+                  onclick="filterOpenRouterUnits('clubhouse', this)">
+                  <span>Clubhouse (177 m²)</span>
                 </button>
               </div>
 
-              <!-- Cluster Showcase Box (Exact Match to User Reference Screenshot) -->
-              <div class="cluster-showcase-display" id="clusterShowcaseDisplay">
-                <!-- Left Tall Hero Card -->
-                <div class="cluster-castle-hero-card" id="showcaseHeroCard">
-                  <div class="castle-card-header">
-                    <div class="castle-title-row">
-                      <h3 class="castle-name" id="showcaseClusterName">Nagoya</h3>
-                      <span class="castle-gold-dot"></span>
+              <!-- Data-Dense Unit Grid -->
+              <div class="openrouter-model-grid" id="openrouterModelGrid">
+                <!-- Unit 1: Nagoya Gold -->
+                <div class="or-model-card" data-cluster="nagoya" onclick="switchBerandaLotCluster('nagoya'); selectBerandaLot('A.02', 'nagoya'); switchLandingTab('siteplan');">
+                  <div class="or-card-top">
+                    <div class="or-card-id-wrap">
+                      <div class="or-model-icon nagoya-icon">N</div>
+                      <div>
+                        <h4 class="or-model-name">Nagoya Gold B.02</h4>
+                        <span class="or-model-provider">Klaster Nagoya · Tipe compact rooftop</span>
+                      </div>
                     </div>
-                    <p class="castle-tagline" id="showcaseClusterTagline">Tipe compact dengan rooftop pribadi.</p>
+                    <span class="or-metric-tag tag-hot">Pilihan utama</span>
                   </div>
-
-                  <div class="castle-visual-banner" id="showcaseVisualBanner">
-                    <img src="assets/drive/gate.png" alt="Klaster Nagoya" class="castle-banner-img"
-                      id="showcaseBannerImg" />
-                    <div class="castle-banner-vignette"></div>
-                    <div class="castle-price-block">
-                      <span class="castle-price-lbl">HARGA MULAI</span>
-                      <strong class="castle-price-val" id="showcaseClusterPrice">Rp 498 Juta</strong>
+                  <div class="or-specs-row">
+                    <span class="or-spec-chip">3 KT</span>
+                    <span class="or-spec-chip">2 KM</span>
+                    <span class="or-spec-chip">LB 75 m²</span>
+                    <span class="or-spec-chip">LT 63–84 m²</span>
+                    <span class="or-spec-chip">Garasi dalam</span>
+                  </div>
+                  <div class="or-card-bottom">
+                    <div>
+                      <span class="or-price-lbl">Harga tunai perdana</span>
+                      <strong class="or-price-val">Rp 650 jt</strong>
+                      <span class="or-kpr-hint">KPR est. Rp 3,2 jt/bln</span>
                     </div>
+                    <button type="button" class="or-btn-action" title="Pilih Kavling Ini">
+                      <span>Pilih kavling &rarr;</span>
+                    </button>
                   </div>
-
-                  <button type="button" class="btn-castle-detail" onclick="switchLandingTab('Unit')">
-                    <span>Lihat Detail Klaster</span>
-                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor"
-                      stroke-width="2.2">
-                      <path d="M5 12h14M12 5l7 7-7 7" />
-                    </svg>
-                  </button>
                 </div>
 
-                <!-- Right Side: Stats Summary Bar & Horizontal Carousel -->
-                <div class="cluster-showcase-right">
-                  <!-- Summary Stats Bar -->
-                  <div class="showcase-summary-bar">
-                    <div class="showcase-stats-grid">
-                      <div class="showcase-stat-item">
-                        <span class="stat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                            <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                          </svg></span>
-                        <div class="stat-text-wrap">
-                          <strong id="showcaseStatAvail">14 Unit</strong>
-                          <span>TERSEDIA</span>
-                        </div>
-                      </div>
-                      <div class="showcase-stat-item">
-                        <span class="stat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="12" y1="3" x2="12" y2="21"></line>
-                          </svg></span>
-                        <div class="stat-text-wrap">
-                          <strong id="showcaseStatLb">60 / 80 m²</strong>
-                          <span>LB MULAI</span>
-                        </div>
-                      </div>
-                      <div class="showcase-stat-item">
-                        <span class="stat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <polygon points="3 20 8 4 21 4 16 20 3 20"></polygon>
-                          </svg></span>
-                        <div class="stat-text-wrap">
-                          <strong id="showcaseStatLt">63–99 m²</strong>
-                          <span>LT MULAI</span>
-                        </div>
-                      </div>
-                      <div class="showcase-stat-item">
-                        <span class="stat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <rect x="3" y="3" width="18" height="18" rx="2" ry="2"></rect>
-                            <line x1="3" y1="12" x2="21" y2="12"></line>
-                            <line x1="12" y1="3" x2="12" y2="21"></line>
-                          </svg></span>
-                        <div class="stat-text-wrap">
-                          <strong id="showcaseStatBeds">3-4 KT</strong>
-                          <span>K. TIDUR</span>
-                        </div>
-                      </div>
-                      <div class="showcase-stat-item">
-                        <span class="stat-icon"><svg viewBox="0 0 24 24" width="16" height="16" fill="none"
-                            stroke="currentColor" stroke-width="2">
-                            <path d="M4 12v7a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-7"></path>
-                            <path d="M2 12h20"></path>
-                            <path d="M7 12V7a3 3 0 0 1 6 0v5"></path>
-                          </svg></span>
-                        <div class="stat-text-wrap">
-                          <strong id="showcaseStatBaths">2-3 KM</strong>
-                          <span>K. MANDI</span>
-                        </div>
+                <!-- Unit 2: Tokyo Prime -->
+                <div class="or-model-card" data-cluster="tokyo" onclick="switchBerandaLotCluster('tokyo'); selectBerandaLot('B.03', 'tokyo'); switchLandingTab('siteplan');">
+                  <div class="or-card-top">
+                    <div class="or-card-id-wrap">
+                      <div class="or-model-icon tokyo-icon">T</div>
+                      <div>
+                        <h4 class="or-model-name">Tokyo Prime B.03</h4>
+                        <span class="or-model-provider">Klaster Tokyo · Koridor utama Sudirman</span>
                       </div>
                     </div>
-                    <div class="showcase-action-cell" onclick="switchLandingTab('Unit')"
-                      role="button" tabindex="0" title="Lihat Semua Unit">
-                      <span class="stat-icon stat-icon-action">
-                        <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                          stroke-width="2.5">
-                          <path d="M5 12h14M12 5l7 7-7 7" />
-                        </svg>
-                      </span>
-                      <div class="stat-text-wrap">
-                        <strong id="showcaseSeeAllLabel">Semua Unit</strong>
-                        <span>KATALOG UNIT</span>
-                      </div>
-                    </div>
+                    <span class="or-metric-tag tag-speed">Koridor Sudirman</span>
                   </div>
-
-                  <!-- Carousel Track Container with Left/Right Arrows -->
-                  <div class="showcase-carousel-wrapper">
-                    <button type="button" class="carousel-arrow-btn prev" onclick="scrollBerandaUnitsCarousel(-1)"
-                      aria-label="Sebelumnya">
-                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <polyline points="15 18 9 12 15 6" />
-                      </svg>
-                    </button>
-                    <div class="showcase-units-carousel" id="berandaUnitsCarousel">
-                      <!-- Rendered dynamically by switchBerandaShowcaseCluster -->
+                  <div class="or-specs-row">
+                    <span class="or-spec-chip">3 KT</span>
+                    <span class="or-spec-chip">2 KM</span>
+                    <span class="or-spec-chip">LB 80 m²</span>
+                    <span class="or-spec-chip">LT 75 m²</span>
+                    <span class="or-spec-chip">Carport &amp; taman</span>
+                  </div>
+                  <div class="or-card-bottom">
+                    <div>
+                      <span class="or-price-lbl">Harga tunai perdana</span>
+                      <strong class="or-price-val">Rp 775 jt</strong>
+                      <span class="or-kpr-hint">KPR est. Rp 3,8 jt/bln</span>
                     </div>
-                    <button type="button" class="carousel-arrow-btn next" onclick="scrollBerandaUnitsCarousel(1)"
-                      aria-label="Berikutnya">
-                      <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor"
-                        stroke-width="2.5">
-                        <polyline points="9 18 15 12 9 6" />
-                      </svg>
+                    <button type="button" class="or-btn-action" title="Pilih Kavling Ini">
+                      <span>Pilih kavling &rarr;</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Unit 3: Osaka Diamond -->
+                <div class="or-model-card" data-cluster="osaka" onclick="switchBerandaLotCluster('osaka'); selectBerandaLot('A.09', 'osaka'); switchLandingTab('siteplan');">
+                  <div class="or-card-top">
+                    <div class="or-card-id-wrap">
+                      <div class="or-model-icon osaka-icon">O</div>
+                      <div>
+                        <h4 class="or-model-name">Osaka Diamond A.09</h4>
+                        <span class="or-model-provider">Klaster Osaka · Flagship luxury 2 garasi</span>
+                      </div>
+                    </div>
+                    <span class="or-metric-tag tag-flagship">Flagship 2 garasi</span>
+                  </div>
+                  <div class="or-specs-row">
+                    <span class="or-spec-chip">4 KT</span>
+                    <span class="or-spec-chip">3 KM</span>
+                    <span class="or-spec-chip">LB 110 m²</span>
+                    <span class="or-spec-chip">LT 110 m²</span>
+                    <span class="or-spec-chip">2 garasi EV ready</span>
+                  </div>
+                  <div class="or-card-bottom">
+                    <div>
+                      <span class="or-price-lbl">Harga tunai perdana</span>
+                      <strong class="or-price-val">Rp 1,15 M</strong>
+                      <span class="or-kpr-hint">KPR est. Rp 5,6 jt/bln</span>
+                    </div>
+                    <button type="button" class="or-btn-action" title="Pilih Kavling Ini">
+                      <span>Pilih kavling &rarr;</span>
+                    </button>
+                  </div>
+                </div>
+
+                <!-- Unit 4: Clubhouse Resor -->
+                <div class="or-model-card" data-cluster="clubhouse" onclick="switchLandingTab('Fasilitas')">
+                  <div class="or-card-top">
+                    <div class="or-card-id-wrap">
+                      <div class="or-model-icon club-icon">C</div>
+                      <div>
+                        <h4 class="or-model-name">Clubhouse resor mandiri</h4>
+                        <span class="or-model-provider">Fasilitas lengkap penghuni The Park</span>
+                      </div>
+                    </div>
+                    <span class="or-metric-tag tag-club">Akses penghuni</span>
+                  </div>
+                  <div class="or-specs-row">
+                    <span class="or-spec-chip">177 m²</span>
+                    <span class="or-spec-chip">Kolam renang</span>
+                    <span class="or-spec-chip">Gym center</span>
+                    <span class="or-spec-chip">Mini golf 9-hole</span>
+                    <span class="or-spec-chip">Taman terbuka</span>
+                  </div>
+                  <div class="or-card-bottom">
+                    <div>
+                      <span class="or-price-lbl">Biaya keanggotaan</span>
+                      <strong class="or-price-val highlight-green">Termasuk IPL</strong>
+                      <span class="or-kpr-hint">Tanpa biaya member terpisah</span>
+                    </div>
+                    <button type="button" class="or-btn-action" title="Jelajahi Fasilitas">
+                      <span>Lihat fasilitas &rarr;</span>
                     </button>
                   </div>
                 </div>
               </div>
 
-              <!-- "Lihat Selengkapnya" Bottom CTA Linking to Halaman Unit -->
-              <div class="showcase-cta-bar">
+              <!-- Preserved Hidden Containers for Existing Carousel Scripts Compatibility -->
+              <div style="display: none;">
+                <span id="showcaseClusterName">Nagoya</span>
+                <span id="showcaseClusterTagline"></span>
+                <strong id="showcaseClusterPrice"></strong>
+                <strong id="showcaseStatAvail"></strong>
+                <strong id="showcaseStatLb"></strong>
+                <strong id="showcaseStatLt"></strong>
+                <strong id="showcaseStatBeds"></strong>
+                <strong id="showcaseStatBaths"></strong>
+                <div id="berandaUnitsCarousel"></div>
+              </div>
+
+              <!-- Bottom CTA Bar -->
+              <div class="showcase-cta-bar" style="margin-top: 14px;">
                 <button type="button" class="btn-primary-forest btn-block" onclick="switchLandingTab('Unit')">
-                  <span>Lihat Selengkapnya Katalog 30 Unit</span>
+                  <span>Lihat katalog lengkap 30 unit &amp; denah &rarr;</span>
                 </button>
               </div>
             </div>
 
-            <!-- 5. MASTER PLAN INTERAKTIF -->
-            <div class="landing-section-card sync-masterplan-card" id="secMasterPlan">
+            <!-- ========================================================
+                 4C. SMART LIVING ROUTER & VALUE OPTIMIZER (Unslopped)
+                 ======================================================== -->
+            <div class="landing-section-card openrouter-router-card" id="secSmartLivingRouter">
+              <div class="or-router-grid">
+                <!-- Left: Headline & Value Proposition -->
+                <div class="or-router-left">
+                  <span class="section-tag-gold">PANDUAN KELUARGA</span>
+                  <h2 class="or-router-title">Menemukan Rumah yang Selaras dengan Ritme Anda</h2>
+                  <p class="or-router-desc">
+                    The Park Townhouse menghadirkan ruang yang bernapas dengan hangat. Setiap sudut dirancang untuk mendukung tumbuh kembang anak, ketenangan istirahat, dan kedekatan antar anggota keluarga.
+                  </p>
+
+                  <div class="or-value-checklist">
+                    <div class="or-check-item">
+                      <span class="check-icon">✓</span>
+                      <div>
+                        <strong>Koridor asri Sukoharjo</strong>
+                        <span>Hanya 100m ke Gelora Merdeka, bebas macet, dan akses prima.</span>
+                      </div>
+                    </div>
+                    <div class="or-check-item">
+                      <span class="check-icon">✓</span>
+                      <div>
+                        <strong>Sertifikat SHM pecah per kavling</strong>
+                        <span>Legalitas aman, IMB/PBG siap, dan proses AJB transparan tanpa rasa cemas.</span>
+                      </div>
+                    </div>
+                    <div class="or-check-item">
+                      <span class="check-icon">✓</span>
+                      <div>
+                        <strong>Warisan bernilai abadi</strong>
+                        <span>Kualitas rancang bangun premium yang terjaga untuk ketenangan lintas generasi.</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <!-- Right: Interactive Japandi Smart Router Simulator -->
+                <div class="or-router-right">
+                  <div class="or-simulator-box">
+                    <div class="or-sim-header">
+                      <span class="or-sim-code">engine: "thepark/japandi-smart-router"</span>
+                      <span class="quiet-status-dot"></span>
+                    </div>
+
+                    <!-- Persona Selector Buttons -->
+                    <div class="or-persona-pills">
+                      <button type="button" class="or-persona-btn is-active" id="btnPersonaFamily" onclick="switchSmartRouterPersona('family', this)">
+                        Keluarga muda
+                      </button>
+                      <button type="button" class="or-persona-btn" id="btnPersonaInvest" onclick="switchSmartRouterPersona('invest', this)">
+                        Ketenangan privat
+                      </button>
+                      <button type="button" class="or-persona-btn" id="btnPersonaExec" onclick="switchSmartRouterPersona('exec', this)">
+                        Keluarga 4 kamar
+                      </button>
+                    </div>
+
+                    <!-- Routing Flow Visual (Static & Clear) -->
+                    <div class="or-flow-stage">
+                      <div class="flow-node node-input" id="routerNodeInput">Keluarga muda</div>
+                      <div class="flow-arrow-line"></div>
+                      <div class="flow-node node-engine">Japandi engine</div>
+                      <div class="flow-arrow-line"></div>
+                      <div class="flow-node node-output highlight-gold" id="routerNodeOutput">Nagoya Gold</div>
+                    </div>
+
+                    <!-- Dynamic Live Calculated Output Card -->
+                    <div class="or-sim-result-card" id="routerResultCard">
+                      <div class="sim-metric-row">
+                        <span class="lbl">Unit rekomendasi</span>
+                        <strong class="val highlight-gold" id="routerValUnit">Nagoya Gold B.02 (LB 75 m²)</strong>
+                      </div>
+                      <div class="sim-metric-row">
+                        <span class="lbl">Keuntungan presale tahap 1</span>
+                        <strong class="val highlight-green" id="routerValSaving">Hemat Rp 35.000.000</strong>
+                      </div>
+                      <div class="sim-metric-row">
+                        <span class="lbl">Estimasi angsuran KPR</span>
+                        <strong class="val" id="routerValKpr">Mulai Rp 3,2 jt / bulan</strong>
+                      </div>
+                      <div class="sim-metric-row">
+                        <span class="lbl">Legalitas dokumen</span>
+                        <strong class="val" id="routerValLegal">100% SHM pecah langsung</strong>
+                      </div>
+
+                      <button type="button" class="or-sim-action-btn" id="routerActionBtn" onclick="orderInspectedLot()">
+                        <span id="routerBtnText">Kunci unit Nagoya Gold B.02</span>
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ========================================================
+                 4D. INFRASTRUCTURE & 24/7 MONITOR (Unslopped)
+                 ======================================================== -->
+            <div class="landing-section-card openrouter-uptime-card" id="secOpenRouterUptime">
               <div class="section-card-head">
-                <span class="section-tag-gold">DENAH KAWASAN</span>
-                <h2 class="section-card-title">Temukan Ritme Klaster yang Sesuai</h2>
-                <p class="section-card-sub">Nagoya dekat fasilitas bersama, Osaka yang dinamis, atau Tokyo yang tenang
-                  privat. Temukan sudut terbaik keluarga Anda.</p>
+                <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 8px;">
+                  <span class="section-tag-gold">Keandalan infrastruktur 24 jam</span>
+                  <span class="or-live-badge" style="border-color: rgba(52, 211, 153, 0.3); color: #34d399;">
+                    <span class="quiet-status-dot"></span>
+                    Sistem beroperasi normal
+                  </span>
+                </div>
+                <h2 class="section-card-title">Infrastruktur &amp; Keamanan Kawasan</h2>
+                <p class="section-card-sub">Dipantau 24 jam dengan sistem barrier gate otomatis, drainase resapan modern, dan jaringan bawah tanah.</p>
               </div>
 
-              <div class="cluster-pill-tabs">
-                <button type="button" class="cluster-pill-btn is-active" id="btnBerandaClusterNagoya"
-                  onclick="switchBerandaLotCluster('nagoya', this)">Nagoya</button>
-                <button type="button" class="cluster-pill-btn" id="btnBerandaClusterOsaka"
-                  onclick="switchBerandaLotCluster('osaka', this)">Osaka</button>
-                <button type="button" class="cluster-pill-btn" id="btnBerandaClusterTokyo"
-                  onclick="switchBerandaLotCluster('tokyo', this)">Tokyo</button>
-              </div>
-
-              <!-- Cluster Summary Header & Top Specs (Ruang 4/7 Style) -->
-              <div class="siteplan-header" style="margin-top: 10px;">
-                <div class="siteplan-title-row">
-                  <h3 class="siteplan-cluster-title" id="berandaSpClusterTitle">Nagoya</h3>
-                  <span class="siteplan-shm-badge" id="berandaSpShmBadge">SHM sudah pecah sempurna (Nagoya)</span>
-                </div>
-                <div class="siteplan-top-specs-box">
-                  <div class="sp-spec-item"><span>Kavling</span> <strong id="berandaTopStatKavling">15 unit</strong>
+              <div class="or-uptime-grid">
+                <!-- Track 1: Smart One-Gate RFID -->
+                <div class="or-uptime-track">
+                  <div class="or-track-header">
+                    <div>
+                      <strong class="or-track-name">Smart one-gate RFID 24 jam</strong>
+                      <span class="or-track-desc">Barrier gate otomatis &amp; pos pengamanan</span>
+                    </div>
+                    <span class="or-track-stat highlight-green">99.98% aktif</span>
                   </div>
-                  <div class="sp-spec-item"><span>Prasarana</span> <strong id="berandaTopStatPrasarana">832,30
-                      m²</strong></div>
-                  <div class="sp-spec-item"><span>Sarana &amp; Clubhouse</span> <strong id="berandaTopStatSarana">254,25
-                      m²</strong></div>
-                  <div class="sp-spec-item"><span>RTH</span> <strong id="berandaTopStatRth">119,60 m²</strong></div>
-                </div>
-              </div>
-
-              <!-- Visual Site Plan Map with Clickable Lots -->
-              <div class="siteplan-map-container" id="berandaSiteplanMapContainer" style="margin-top: 10px;">
-                <div class="siteplan-compass-badge">
-                  <svg viewBox="0 0 24 24" width="12" height="12" fill="currentColor">
-                    <path d="M12 2L16 11H8L12 2Z" fill="#b39255" />
-                    <path d="M12 22L8 13H16L12 22Z" fill="#718277" />
-                  </svg>
-                  <span>UTARA</span>
-                </div>
-                <img src="assets/drive/siteplan-nagoya.jpg" alt="Site Plan Kawasan" class="siteplan-img"
-                  id="berandaSpImg" />
-                <div class="siteplan-lots-overlay" id="berandaSpLotsOverlay">
-                  <!-- Dynamically rendered kavling interactive buttons -->
-                </div>
-              </div>
-
-              <!-- Kavling Quick Selector: Clean 4-Column Pill Grid like Ruang 4/7 -->
-              <div class="kavling-quick-selector" style="margin-top: 14px;">
-                <div class="kavling-pills-scroll" id="berandaKavlingPillsRow">
-                  <!-- Dynamically rendered pills (A.01 · 84 m², etc.) -->
-                </div>
-              </div>
-
-              <!-- Selected Lot Inspector Card (Clean Frosted Vertical Stack like Ruang 4/7) -->
-              <div class="kavling-detail-card clean-frosted-card" id="berandaLotInspector" style="margin-top: 14px;">
-                <div class="kavling-detail-header">
-                  <div>
-                    <span class="kavling-label">KAVLING TERPILIH</span>
-                    <h4 class="kavling-id-title" id="inspLotTag">Kavling A.01</h4>
-                  </div>
-                  <span class="kavling-status-badge status-available" id="inspLotStatus">TERSEDIA</span>
-                </div>
-
-                <div class="kavling-specs-clean">
-                  <div class="kavling-clean-row">
-                    <span class="label">Luas Bangunan</span>
-                    <strong class="val" id="inspLotLb">75 m²</strong>
-                  </div>
-                  <div class="kavling-clean-row">
-                    <span class="label">Luas Tanah</span>
-                    <strong class="val" id="inspLotLt">84 m²</strong>
-                  </div>
-                  <div class="kavling-clean-row">
-                    <span class="label">Tipe Bangunan</span>
-                    <strong class="val" id="inspLotType">Nagoya Gold (LB 75)</strong>
-                  </div>
-                  <div class="kavling-clean-row price-row">
-                    <span class="label">Harga Cash Keras</span>
-                    <strong class="val price-val" id="inspLotPrice">Rp 720 Juta</strong>
+                  <div class="or-uptime-bar">
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
                   </div>
                 </div>
 
-                <button type="button" class="btn-order-kavling-champagne" onclick="orderInspectedLot()">
-                  <span>Pesan Kavling Ini</span>
-                </button>
+                <!-- Track 2: Bebas Banjir Dataran Tinggi -->
+                <div class="or-uptime-track">
+                  <div class="or-track-header">
+                    <div>
+                      <strong class="or-track-name">Drainase tertutup dataran tinggi</strong>
+                      <span class="or-track-desc">Elevasi aman dari genangan air</span>
+                    </div>
+                    <span class="or-track-stat highlight-green">100% bebas genangan</span>
+                  </div>
+                  <div class="or-uptime-bar">
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                  </div>
+                </div>
+
+                <!-- Track 3: Jaringan Utilitas Bawah Tanah -->
+                <div class="or-uptime-track">
+                  <div class="or-track-header">
+                    <div>
+                      <strong class="or-track-name">Utilitas bawah tanah &amp; fiber optik</strong>
+                      <span class="or-track-desc">Kelistrikan rapi tanpa kabel udara</span>
+                    </div>
+                    <span class="or-track-stat highlight-green">100% stabil</span>
+                  </div>
+                  <div class="or-uptime-bar">
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                  </div>
+                </div>
+
+                <!-- Track 4: Estate Management & Clubhouse -->
+                <div class="or-uptime-track">
+                  <div class="or-track-header">
+                    <div>
+                      <strong class="or-track-name">Estate management &amp; clubhouse</strong>
+                      <span class="or-track-desc">Perawatan kolam renang, gym, dan kebersihan</span>
+                    </div>
+                    <span class="or-track-stat highlight-gold">Standar resor</span>
+                  </div>
+                  <div class="or-uptime-bar">
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                    <span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span><span class="bar-block is-up"></span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- ========================================================
+                 5. THE PARK DIGITAL TWIN & 3D SMART ESTATE OS
+                 (Felvra-Inspired 3D Isometric View, Radar Sweep & Telemetry HUD)
+                 ======================================================== -->
+            <div class="estate-os-wrapper sync-masterplan-card" id="secMasterPlan">
+              <div class="estate-os-ambient-glow"></div>
+
+              <!-- Deck Top Status Bar -->
+              <div class="estate-os-top-bar">
+                <div class="estate-os-brand-group">
+                  <span class="estate-os-logo-badge">
+                    <span class="estate-os-status-pulse"></span>
+                    THE PARK ESTATE OS
+                  </span>
+                  <span class="twin-view-mode-badge">
+                    <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="12 2 2 7 12 12 22 7 12 2"/>
+                      <polyline points="2 17 12 22 22 17"/>
+                      <polyline points="2 12 12 17 22 12"/>
+                    </svg>
+                    3D Digital Twin · v2.6
+                  </span>
+                </div>
+
+                <div class="estate-os-telemetry-meta">
+                  <span class="estate-os-meta-chip">
+                    <span style="color: #f5cf87;">☀️</span> 31°C · Sukoharjo Golden Hour
+                  </span>
+                  <span class="estate-os-meta-chip">
+                    <span style="color: #34d399;">●</span> One-Gate RFID 24/7 Active
+                  </span>
+                </div>
               </div>
 
-              <!-- Siteplan Bottom Stats Grid -->
-              <div class="siteplan-stats-grid" style="margin-top: 14px;">
-                <div class="siteplan-stat-cell">
-                  <span class="stat-name">Kavling</span>
-                  <strong class="stat-number" id="berandaStatKavlingVal">15 unit</strong>
+              <!-- Two-Column Deck Grid: 3D Twin Stage + HUD Telemetry Panel -->
+              <div class="estate-os-deck-grid">
+                <!-- Left: 3D Isometric Interactive Stage -->
+                <div class="estate-os-twin-stage">
+                  <div class="twin-stage-toolbar">
+                    <div class="twin-cluster-pills">
+                      <button type="button" class="twin-pill-btn is-active" id="btnBerandaClusterNagoya"
+                        onclick="switchBerandaLotCluster('nagoya', this)">Klaster Nagoya (15 Unit)</button>
+                      <button type="button" class="twin-pill-btn" id="btnBerandaClusterOsaka"
+                        onclick="switchBerandaLotCluster('osaka', this)">Osaka (7 Unit)</button>
+                      <button type="button" class="twin-pill-btn" id="btnBerandaClusterTokyo"
+                        onclick="switchBerandaLotCluster('tokyo', this)">Tokyo (8 Unit)</button>
+                    </div>
+                    <span class="siteplan-shm-badge" id="berandaSpShmBadge" style="background: rgba(52, 211, 153, 0.15); border-color: rgba(52, 211, 153, 0.35); color: #34d399;">
+                      SHM Pecah Sempurna
+                    </span>
+                  </div>
+
+                  <!-- 3D Viewport with Isometric Tilt & Radar Effect -->
+                  <div class="twin-viewport-3d" id="berandaSiteplanMapContainer">
+                    <div class="twin-radar-sweep"></div>
+                    
+                    <div class="twin-canvas-isometric" id="twinCanvasIso">
+                      <img src="assets/drive/siteplan-nagoya.jpg" alt="Site Plan Kawasan 3D" class="twin-siteplan-base-img" id="berandaSpImg" />
+                      <div class="siteplan-lots-overlay" id="berandaSpLotsOverlay">
+                        <!-- Dynamically rendered interactive lot beacons -->
+                      </div>
+                    </div>
+                  </div>
+
+                  <!-- Kavling Quick Selector Ribbon -->
+                  <div class="kavling-quick-selector" style="padding: 10px 16px; background: rgba(5, 14, 10, 0.7); border-top: 1px solid rgba(52, 211, 153, 0.15);">
+                    <div class="kavling-pills-scroll" id="berandaKavlingPillsRow">
+                      <!-- Dynamically rendered lot pills -->
+                    </div>
+                  </div>
                 </div>
-                <div class="siteplan-stat-cell">
-                  <span class="stat-name">Prasarana</span>
-                  <strong class="stat-number" id="berandaStatPrasaranaVal">832,30 m²</strong>
-                </div>
-                <div class="siteplan-stat-cell">
-                  <span class="stat-name">Fasilitas</span>
-                  <strong class="stat-number" id="berandaStatSaranaVal">254,25 m²</strong>
-                </div>
-                <div class="siteplan-stat-cell">
-                  <span class="stat-name">RTH</span>
-                  <strong class="stat-number" id="berandaStatRthVal">119,60 m²</strong>
+
+                <!-- Right: HUD Telemetry Control Panel -->
+                <div class="estate-os-hud-panel">
+                  <div class="hud-panel-header">
+                    <div>
+                      <span class="hud-tile-label" style="display: block; margin-bottom: 2px;">TELEMETRI KAWASAN</span>
+                      <h4 class="hud-panel-title" id="berandaSpClusterTitle">Klaster Nagoya</h4>
+                    </div>
+                    <span class="hud-status-badge">
+                      <span class="estate-os-status-pulse" style="width: 5px; height: 5px;"></span>
+                      Live Monitoring
+                    </span>
+                  </div>
+
+                  <!-- 4-Grid Telemetry Metric Tiles -->
+                  <div class="hud-metrics-grid">
+                    <div class="hud-tile">
+                      <span class="hud-tile-label">Nilai Properti</span>
+                      <strong class="hud-tile-val highlight-green">Rp 1,15 M</strong>
+                      <span style="font-size: 9.5px; color: #34d399;">Rancang Bangun Standar Jepang</span>
+                    </div>
+                    <div class="hud-tile">
+                      <span class="hud-tile-label">Kavling Terkunci</span>
+                      <strong class="hud-tile-val highlight-gold" id="berandaTopStatKavling">15 unit</strong>
+                      <span style="font-size: 9.5px; color: rgba(245, 207, 135, 0.8);">Presale Tahap 1</span>
+                    </div>
+                    <div class="hud-tile">
+                      <span class="hud-tile-label">Clubhouse Resor</span>
+                      <strong class="hud-tile-val" id="berandaTopStatSarana">254,25 m²</strong>
+                      <span style="font-size: 9.5px; color: #a1b8ac;">Fasilitas Lengkap</span>
+                    </div>
+                    <div class="hud-tile">
+                      <span class="hud-tile-label">Area Terbuka / RTH</span>
+                      <strong class="hud-tile-val" id="berandaTopStatRth">119,60 m²</strong>
+                      <span style="font-size: 9.5px; color: #a1b8ac;">Kesejukan Alami</span>
+                    </div>
+                  </div>
+
+                  <!-- Active Lot Telemetry Inspector -->
+                  <div class="hud-inspector-card" id="berandaLotInspector">
+                    <div style="display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid rgba(245, 207, 135, 0.2); padding-bottom: 8px;">
+                      <div>
+                        <span class="hud-tile-label">DATA KAVLING TERPILIH</span>
+                        <h5 style="font-family: var(--font-serif); font-size: 16px; color: #fff9ed; margin: 2px 0 0;" id="inspLotTag">Kavling A.01</h5>
+                      </div>
+                      <span class="kavling-status-badge status-available" id="inspLotStatus" style="font-size: 10px; padding: 3px 8px; border-radius: 999px;">TERSEDIA</span>
+                    </div>
+
+                    <div style="display: flex; flex-direction: column; gap: 6px; margin-top: 4px;">
+                      <div class="hud-insp-row">
+                        <span class="lbl">Tipe Bangunan</span>
+                        <span class="val" id="inspLotType">Nagoya Gold (LB 75)</span>
+                      </div>
+                      <div class="hud-insp-row">
+                        <span class="lbl">Luas Bangunan / Tanah</span>
+                        <span class="val"><span id="inspLotLb">75</span> m² / <span id="inspLotLt">84</span> m²</span>
+                      </div>
+                      <div class="hud-insp-row" style="margin-top: 4px; border-top: 1px solid rgba(255, 255, 255, 0.08); padding-top: 6px;">
+                        <span class="lbl">Harga Tunai Keras</span>
+                        <strong class="price-val" id="inspLotPrice">Rp 720 Juta</strong>
+                      </div>
+                    </div>
+
+                    <button type="button" class="btn-hud-order" onclick="orderInspectedLot()">
+                      <span>✓ Kunci Kavling Ini via Estate OS</span>
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -2318,9 +2638,8 @@
                 </div>
                 <div class="eleven-pillar-card">
                   <div class="ep-num">09</div>
-                  <h4 class="ep-title">Potensi Capital Gain 18%</h4>
-                  <p class="ep-desc">Perkembangan kawasan pesat dengan potensi sewa tinggi bagi ekspatriat &
-                    profesional.</p>
+                  <h4 class="ep-title">Warisan Bernilai Abadi</h4>
+                  <p class="ep-desc">Kualitas rancang bangun premium dan sertifikat SHM pecah, menjaga rasa aman keluarga lintas generasi.</p>
                 </div>
                 <div class="eleven-pillar-card">
                   <div class="ep-num">10</div>
@@ -2336,13 +2655,12 @@
               </div>
             </div>
 
-            <!-- 10. SIMULASI INVESTASI & SEWA (LIVE YIELD & ROI) -->
+            <!-- 10. SKEMA NYAMAN KEPEMILIKAN RUMAH -->
             <div class="landing-section-card">
               <div class="section-card-head">
-                <span class="section-tag-gold">PROYEKSI BISNIS</span>
-                <h2 class="section-card-title">Simulasi Investasi &amp; Sewa</h2>
-                <p class="section-card-sub">Proyeksi pertumbuhan nilai aset dan potensi passive income sewa tahunan
-                  Anda.</p>
+                <span class="section-tag-gold">PERENCANAAN HUNIAN</span>
+                <h2 class="section-card-title">Skema Nyaman Kepemilikan Rumah</h2>
+                <p class="section-card-sub">Pilihan pembiayaan yang transparan dan bersahabat untuk memudahkan langkah keluarga Anda menuju rumah impian.</p>
               </div>
 
               <!-- Type Toggle -->
@@ -2357,37 +2675,72 @@
               <div class="invest-calc-box">
                 <div class="invest-stats-header">
                   <div class="stat-main">
-                    <span class="stat-label">Total Keuntungan 5 Tahun (ROI)</span>
+                    <span class="stat-label">Simulasi Nilai &amp; Kepemilikan Tenang</span>
                     <h3 class="stat-val" id="investRoiVal">Rp 674.655.879</h3>
-                    <span class="stat-badge-green" id="investRoiPercent">+135% Return on Investment</span>
+                    <span class="stat-badge-green" id="investRoiPercent">Preservasi Nilai &amp; Kenyamanan Terjamin</span>
                   </div>
                 </div>
 
                 <div class="invest-breakdown-list">
                   <div class="breakdown-row">
-                    <span>Estimasi Harga Beli Saat Ini:</span>
+                    <span>Estimasi Harga Perdana Saat Ini:</span>
                     <strong id="investBuyPrice">Rp 500.000.000</strong>
                   </div>
                   <div class="breakdown-row">
-                    <span>Estimasi Sewa Tahunan:</span>
+                    <span>Estimasi Nilai Manfaat Sewa:</span>
                     <strong id="investRentalYield">Rp 35.000.000 / thn</strong>
                   </div>
                   <div class="breakdown-row">
-                    <span>Kenaikan Properti Tahunan:</span>
+                    <span>Apresiasi Lingkungan Rata-rata:</span>
                     <strong id="investCapitalGain">15% / tahun</strong>
                   </div>
                   <div class="breakdown-row">
-                    <span>Proyeksi Nilai Tahun ke-5:</span>
+                    <span>Estimasi Apresiasi Nilai Tahun ke-5:</span>
                     <strong id="investYear5Val">Rp 1.174.655.879</strong>
                   </div>
                   <div class="breakdown-row highlight-row">
-                    <span>Annualized Capital Gain:</span>
-                    <strong id="investAnnualized">27.1% p.a.</strong>
+                    <span>Kepastian Sertifikat:</span>
+                    <strong id="investAnnualized">100% SHM Siap AJB</strong>
                   </div>
                   <div class="breakdown-row highlight-row">
-                    <span>Rental Yield Rate:</span>
-                    <strong id="investYieldRate">6.9% / tahun</strong>
+                    <span>Pilihan Skema Bayar:</span>
+                    <strong id="investYieldRate">Cash / Bertahap / KPR</strong>
                   </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- DEDICATED FAMILY SHARE CONFIGURATION BANNER CARD -->
+            <div class="landing-section-card family-share-banner-card" id="secFamilyShareBanner">
+              <div class="family-share-content">
+                <div class="family-share-badge">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="currentColor">
+                    <path d="M16 11c1.66 0 2.99-1.34 2.99-3S17.66 5 16 5s-3 1.34-3 3 1.34 3 3 3zm-8 0c1.66 0 2.99-1.34 2.99-3S9.66 5 8 5 5 6.34 5 8s1.34 3 3 3zm0 2c-2.33 0-7 1.17-7 3.5V19h14v-2.5c0-2.33-4.67-3.5-7-3.5zm8 0c-.29 0-.62.02-.97.05 1.16.84 1.97 1.97 1.97 3.45V19h6v-2.5c0-2.33-4.67-3.5-7-3.5z"/>
+                  </svg>
+                  <span>MOMEN KELUARGA</span>
+                </div>
+                <h3 class="family-share-title">Diskusikan Rumah Idaman Bersama Pasangan &amp; Keluarga</h3>
+                <p class="family-share-desc">Keputusan memilih rumah selalu lebih bermakna bila dibicarakan bersama. Bagikan hasil eksplorasi kavling, tata ruang kustom, dan simulasi angsuran yang telah Anda simpan langsung ke WhatsApp pasangan atau keluarga.</p>
+                <div class="family-share-btn-row">
+                  <button type="button" class="btn-share-family-wa" onclick="shareSavedHouseConfiguration('family')">
+                    <svg viewBox="0 0 24 24" width="17" height="17" fill="currentColor">
+                      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2Z"/>
+                    </svg>
+                    <span>Bagikan ke WhatsApp Keluarga</span>
+                  </button>
+                  <button type="button" class="btn-share-preview-config" onclick="openSavedConfigModal()">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                      <path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"/>
+                    </svg>
+                    <span>Lihat Rincian Tersimpan</span>
+                  </button>
+                  <button type="button" class="btn-share-copy-outline" onclick="shareSavedHouseConfiguration('copy')">
+                    <svg viewBox="0 0 24 24" width="16" height="16" fill="none" stroke="currentColor" stroke-width="2">
+                      <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                      <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                    </svg>
+                    <span>Salin Ringkasan</span>
+                  </button>
                 </div>
               </div>
             </div>
@@ -2892,7 +3245,7 @@
                     hubungannya hangat, dan sertifikat SHM sudah pecah resmi per kavling sejak awal."</p>
                   <div class="t-author">
                     <strong>H. Bambang Sugiarto</strong>
-                    <span>Investor &amp; Pengusaha Tekstil · Solo</span>
+                    <span>Wiraswasta &amp; Kepala Keluarga · Solo</span>
                   </div>
                 </div>
 
@@ -3542,10 +3895,10 @@
                 </div>
               </div>
 
-              <!-- 2. Kalkulator Hitung Investasi & Skema Pembayaran -->
+              <!-- 2. Kalkulator Simulasi Pembayaran & Skema Kepemilikan -->
               <div class="unit-detail-section-card unit-detail-calc-wrapper" id="secDetailCalculator">
                 <div class="detail-sec-head">
-                  <span class="detail-sec-tag">SIMULASI INVESTASI</span>
+                  <span class="detail-sec-tag">SIMULASI KEPEMILIKAN</span>
                   <h3 class="detail-sec-title">Kalkulator Simulasi Pembayaran</h3>
                   <p class="detail-sec-desc">Hitung estimasi skema tunai, cash bertahap in-house bunga 0%, simulasi KPR
                     bank mitra, serta estimasi pajak &amp; biaya legalitas.</p>
@@ -5050,12 +5403,12 @@
                 <div class="hosp-services-grid">
                   <div class="hosp-service-card">
                     <div class="hosp-service-img-box">
-                      <img src="assets/drive/aerial-drone.jpeg" alt="Investasi Masa Depan" class="hosp-service-img" />
+                      <img src="assets/drive/aerial-drone.jpeg" alt="Hunian Generasi Masa Depan" class="hosp-service-img" />
                       <span class="hosp-service-badge">Aset</span>
                     </div>
                     <div class="hosp-service-content">
-                      <h4>Investasi Masa Depan</h4>
-                      <p>Keuntungan ganda untuk masa depan yang lebih pasti.</p>
+                      <h4>Hunian Generasi Masa Depan</h4>
+                      <p>Ketenangan menyeluruh untuk masa depan keluarga yang lebih pasti.</p>
                     </div>
                   </div>
                   <div class="hosp-service-card">
@@ -5116,16 +5469,16 @@
                 </div>
               </div>
 
-              <!-- PASSIVE INCOME DALAM 1 KALI KLIK (4 TAHAPAN) -->
+              <!-- PENGELOLAAN PRAKTIS (4 TAHAPAN) -->
               <div class="landing-section-card">
                 <div class="section-card-head">
                   <span class="section-tag-gold">PROSES PRAKTIS</span>
-                  <h3 class="section-card-title">Passive Income dalam 1 kali Klik</h3>
+                  <h3 class="section-card-title">Hunian Terkelola dalam Kemudahan 1 Aplikasi</h3>
                 </div>
                 <div class="hosp-steps-grid">
                   <div class="hosp-step-card">
                     <div class="hs-step-num">01</div>
-                    <h4>Pembelian Unit</h4>
+                    <h4>Pilihan Unit</h4>
                     <p>Pilih unit hunian favorit Anda di The Park Townhouse.</p>
                   </div>
                   <div class="hosp-step-card">
@@ -5136,12 +5489,12 @@
                   <div class="hosp-step-card">
                     <div class="hs-step-num">03</div>
                     <h4>Pengelolaan Penuh</h4>
-                    <p>Tim profesional mengurus pemasaran, tamu, hingga pemeliharaan.</p>
+                    <p>Tim profesional mengurus pemeliharaan, kebersihan, dan kenyamanan hunian.</p>
                   </div>
                   <div class="hosp-step-card">
                     <div class="hs-step-num">04</div>
-                    <h4>Terima Pasif Income</h4>
-                    <p>Pantau laporan berkala &amp; nikmati hasil sewa langsung ke rekening Anda.</p>
+                    <h4>Kenyamanan Nyata</h4>
+                    <p>Pantau kondisi unit secara berkala dengan tenang melalui aplikasi.</p>
                   </div>
                 </div>
               </div>
@@ -5150,7 +5503,7 @@
               <div class="landing-section-card">
                 <div class="section-card-head">
                   <span class="section-tag-gold">MENGAPA DITITIPKAN KE KAMI?</span>
-                  <h3 class="section-card-title">Investasi Tenang, Hasil Berjalan</h3>
+                  <h3 class="section-card-title">Hunian Terawat, Nilai Berkelanjutan</h3>
                 </div>
                 <div class="hosp-benefits-list">
                   <div class="hb-item">
@@ -5158,21 +5511,21 @@
                         stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12" />
                       </svg></span>
-                    <span>100% hands-off — cocok untuk investor &amp; perantau</span>
+                    <span>100% praktis — cocok untuk keluarga dinamis &amp; perantau</span>
                   </div>
                   <div class="hb-item">
                     <span class="hb-check"><svg viewBox="0 0 24 24" width="10" height="10" fill="none"
                         stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12" />
                       </svg></span>
-                    <span>Penyewa terverifikasi &amp; kontrak legal</span>
+                    <span>Penyewa terverifikasi &amp; kontrak legal terjamin</span>
                   </div>
                   <div class="hb-item">
                     <span class="hb-check"><svg viewBox="0 0 24 24" width="10" height="10" fill="none"
                         stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12" />
                       </svg></span>
-                    <span>Unit terawat, nilai jual kembali terjaga</span>
+                    <span>Unit senantiasa bersih, nilai estetika &amp; fisik terjaga</span>
                   </div>
                   <div class="hb-item">
                     <span class="hb-check"><svg viewBox="0 0 24 24" width="10" height="10" fill="none"
@@ -5186,7 +5539,7 @@
                         stroke="currentColor" stroke-width="3">
                         <polyline points="20 6 9 17 4 12" />
                       </svg></span>
-                    <span>Tim hospitality profesional berpengalaman</span>
+                    <span>Tim hospitality berstandar bintang lima</span>
                   </div>
                 </div>
                 <button type="button" class="btn-primary-forest" onclick="openQuickModal('wa')"
@@ -5195,11 +5548,11 @@
                 </button>
               </div>
 
-              <!-- SIMULASI KEUNTUNGAN INVESTASI (KALKULATOR) -->
+              <!-- SIMULASI PEMELIHARAAN & PRESERVASI NILAI -->
               <div class="landing-section-card" id="hospSimSection">
                 <div class="section-card-head">
-                  <span class="section-tag-gold">SIMULASI KEUNTUNGAN INVESTASI</span>
-                  <h3 class="section-card-title">Sewa + Kenaikan Nilai Properti</h3>
+                  <span class="section-tag-gold">SIMULASI MANFAAT HUNIAN</span>
+                  <h3 class="section-card-title">Manfaat Hunian &amp; Preservasi Nilai Properti</h3>
                 </div>
 
                 <div class="hosp-sim-tabs">
@@ -5215,22 +5568,22 @@
                     <strong id="hospSimUnitPrice">Rp 498.278.753</strong>
                   </div>
                   <div class="hosp-calc-row">
-                    <span>Estimasi Sewa / Bulan</span>
+                    <span>Estimasi Manfaat Sewa / Bulan</span>
                     <strong id="hospSimRentMonth">Rp 3.000.000</strong>
                   </div>
                   <div class="hosp-calc-row">
-                    <span>Lama Investasi</span>
+                    <span>Jangka Waktu Kepemilikan</span>
                     <strong>5 Tahun</strong>
                   </div>
 
                   <div class="hosp-roi-triptych">
                     <div class="roi-item">
                       <strong id="hospSimRoiTotal">111%</strong>
-                      <span>ROI Total</span>
+                      <span>Apresiasi Total</span>
                     </div>
                     <div class="roi-item">
                       <strong id="hospSimRoiYear">22.2%</strong>
-                      <span>ROI / Thn</span>
+                      <span>Apresiasi / Thn</span>
                     </div>
                     <div class="roi-item">
                       <strong id="hospSimRentYield">7.2%</strong>
@@ -5239,15 +5592,13 @@
                   </div>
 
                   <div class="hosp-total-profit-box">
-                    <span class="profit-lbl">Total Estimasi Keuntungan (5 Thn)</span>
+                    <span class="profit-lbl">Total Nilai Manfaat &amp; Apresiasi (5 Thn)</span>
                     <strong class="profit-num" id="hospSimTotalProfit">Rp 553.709.065</strong>
-                    <span class="profit-sub" id="hospSimProfitBreakdown">Sewa Rp 180.000.000 + Capital Gain +Rp
-                      373.709.065</span>
+                    <span class="profit-sub" id="hospSimProfitBreakdown">Manfaat Sewa Rp 180.000.000 + Apresiasi Kawasan +Rp 373.709.065</span>
                   </div>
 
                   <small class="hosp-calc-disclaimer">
-                    *Estimasi non-mengikat berbasis potensi kawasan (yield 6–8% &amp; capital gain 12–18% p.a.). Hasil
-                    bergantung kondisi pasar.
+                    *Estimasi pemodelan nilai berbasis perkembangan kawasan Sukoharjo.
                   </small>
                 </div>
               </div>
@@ -5320,70 +5671,6 @@
             <span class="b-text">Fasilitas</span>
           </button>
         </nav>
-
-        <!-- Floating Quick Navigation Action Button (Return to Welcome / Tour) -->
-        <div class="floating-return-widget" id="floatingReturnWidget" style="display: none;">
-          <!-- Popover Menu -->
-          <div class="floating-return-menu" id="floatingReturnMenu" aria-hidden="true">
-            <div class="return-menu-header">
-              <span class="return-menu-title">NAVIGASI CEPAT</span>
-              <button class="return-menu-close" id="closeReturnMenuBtn" type="button" aria-label="Tutup menu">
-                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2">
-                  <line x1="18" y1="6" x2="6" y2="18"></line>
-                  <line x1="6" y1="6" x2="18" y2="18"></line>
-                </svg>
-              </button>
-            </div>
-            <button class="return-menu-item" id="btnReturnToWelcome" type="button">
-              <div class="menu-item-icon">
-                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16"></path>
-                  <path d="M9 21V10h6v11"></path>
-                  <circle cx="10" cy="15" r="1" fill="currentColor"></circle>
-                </svg>
-              </div>
-              <div class="menu-item-text">
-                <span class="item-title">Pintu Utama (Welcome)</span>
-                <span class="item-desc">Kembali ke animasi pintu emas The Park</span>
-              </div>
-            </button>
-            <button class="return-menu-item" id="btnReturnToTour" type="button">
-              <div class="menu-item-icon">
-                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
-                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
-                </svg>
-              </div>
-              <div class="menu-item-text">
-                <span class="item-title">Mulai Ulang Tur Rumah</span>
-                <span class="item-desc">Mulai dari Ruang 1 sebelum konfigurasi</span>
-              </div>
-            </button>
-            <button class="return-menu-item" id="btnReturnToBeranda" type="button">
-              <div class="menu-item-icon">
-                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
-                  <rect x="3" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="3" width="7" height="7"></rect>
-                  <rect x="14" y="14" width="7" height="7"></rect>
-                  <rect x="3" y="14" width="7" height="7"></rect>
-                </svg>
-              </div>
-              <div class="menu-item-text">
-                <span class="item-title">Halaman Beranda</span>
-                <span class="item-desc">Katalog unit, 99 keunggulan &amp; fasilitas</span>
-              </div>
-            </button>
-          </div>
-
-          <!-- Floating Trigger Button (FAB) -->
-          <button class="floating-return-btn" id="floatingReturnBtn" type="button" title="Kembali ke Awal / Pintu Utama" aria-label="Kembali ke Awal">
-            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
-              <path d="M3 3v5h5" />
-            </svg>
-            <span class="floating-btn-label">Pintu Awal</span>
-          </button>
-        </div>
       </div>
 
       <!-- ================================================================
@@ -5507,6 +5794,26 @@
               </div>
             </div>
 
+            <!-- Bagikan Rancangan Rumah Bersama Pasangan & Keluarga -->
+            <div class="saved-share-section">
+              <span class="saved-rooms-title">Bagikan Rancangan Bersama Pasangan &amp; Keluarga:</span>
+              <div class="share-actions-grid">
+                <button class="btn-share-family-wa" type="button" onclick="shareSavedHouseConfiguration('family')">
+                  <svg viewBox="0 0 24 24" width="16" height="16" fill="currentColor">
+                    <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91C2.13 13.66 2.59 15.36 3.45 16.86L2.05 22L7.3 20.62C8.75 21.41 10.38 21.83 12.04 21.83C17.5 21.83 21.95 17.38 21.95 11.92C21.95 9.27 20.92 6.78 19.05 4.91C17.18 3.03 14.69 2 12.04 2Z"/>
+                  </svg>
+                  <span>Bagikan ke WhatsApp Keluarga</span>
+                </button>
+                <button class="btn-share-copy" type="button" onclick="shareSavedHouseConfiguration('copy')">
+                  <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+                    <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+                  </svg>
+                  <span>Salin Teks Ringkasan</span>
+                </button>
+              </div>
+            </div>
+
             <!-- Consultation Direct Action -->
             <div class="drawer-cta-actions">
               <button class="btn-primary-forest" type="button" onclick="sendSavedConfigToWA()">
@@ -5607,6 +5914,72 @@
           </div>
           <div id="modalBody"></div>
         </div>
+      </div>
+
+      <!-- ================================================================
+           FLOATING RETURN WIDGET (PINTU AWAL / WELCOME SCREEN)
+           ================================================================ -->
+      <div class="floating-return-widget" id="floatingReturnWidget">
+        <!-- Popover Menu -->
+        <div class="floating-return-menu" id="floatingReturnMenu" aria-hidden="true">
+          <div class="return-menu-header">
+            <span class="return-menu-title">NAVIGASI CEPAT</span>
+            <button class="return-menu-close" id="closeReturnMenuBtn" type="button" aria-label="Tutup menu">
+              <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2">
+                <line x1="18" y1="6" x2="6" y2="18"></line>
+                <line x1="6" y1="6" x2="18" y2="18"></line>
+              </svg>
+            </button>
+          </div>
+          <button class="return-menu-item" id="btnReturnToWelcome" type="button">
+            <div class="menu-item-icon">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16"></path>
+                <path d="M9 21V10h6v11"></path>
+                <circle cx="10" cy="15" r="1" fill="currentColor"></circle>
+              </svg>
+            </div>
+            <div class="menu-item-text">
+              <span class="item-title">Pintu Utama (Welcome)</span>
+              <span class="item-desc">Kembali ke animasi pintu emas The Park</span>
+            </div>
+          </button>
+          <button class="return-menu-item" id="btnReturnToTour" type="button">
+            <div class="menu-item-icon">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+                <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                <polyline points="9 22 9 12 15 12 15 22"></polyline>
+              </svg>
+            </div>
+            <div class="menu-item-text">
+              <span class="item-title">Mulai Ulang Tur Rumah</span>
+              <span class="item-desc">Mulai dari Ruang 1 sebelum konfigurasi</span>
+            </div>
+          </button>
+          <button class="return-menu-item" id="btnReturnToBeranda" type="button">
+            <div class="menu-item-icon">
+              <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+                <rect x="3" y="3" width="7" height="7"></rect>
+                <rect x="14" y="3" width="7" height="7"></rect>
+                <rect x="14" y="14" width="7" height="7"></rect>
+                <rect x="3" y="14" width="7" height="7"></rect>
+              </svg>
+            </div>
+            <div class="menu-item-text">
+              <span class="item-title">Halaman Beranda</span>
+              <span class="item-desc">Katalog unit &amp; fasilitas kawasan</span>
+            </div>
+          </button>
+        </div>
+
+        <!-- Floating Trigger Button (FAB) -->
+        <button class="floating-return-btn" id="floatingReturnBtn" type="button" title="Kembali ke Awal / Pintu Utama" aria-label="Kembali ke Awal">
+          <svg viewBox="0 0 24 24" width="15" height="15" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+            <path d="M3 3v5h5" />
+          </svg>
+          <span class="floating-btn-label">Pintu Awal</span>
+        </button>
       </div>
 
     </div>

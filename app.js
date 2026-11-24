@@ -97,7 +97,6 @@ function directToBerandaOnLoad() {
   }
   if (returnWidget) {
     returnWidget.style.display = 'block';
-    returnWidget.classList.add('has-bottom-bar');
   }
 
   initLandingPage();
@@ -2092,7 +2091,6 @@ function finishTourAndExit() {
     const returnWidget = document.getElementById('floatingReturnWidget');
     if (returnWidget) {
       returnWidget.style.display = 'block';
-      returnWidget.classList.add('has-bottom-bar');
     }
     return;
   }
@@ -2118,7 +2116,6 @@ function finishTourAndExit() {
     const returnWidget = document.getElementById('floatingReturnWidget');
     if (returnWidget) {
       returnWidget.style.display = 'block';
-      returnWidget.classList.add('has-bottom-bar');
     }
 
     closingOverlay.style.opacity = '0';
@@ -3304,6 +3301,101 @@ function sendSavedConfigToWA() {
   window.open(`https://wa.me/62882007392379?text=${text}`, '_blank');
 }
 
+function getHouseConfigurationSummary() {
+  let config = null;
+  try {
+    const raw = localStorage.getItem('theParkSavedConfig');
+    if (raw) config = JSON.parse(raw);
+  } catch (_) { }
+
+  const unit = HOUSE_UNITS[selectedUnitKey] || HOUSE_UNITS.nagoya;
+  const lot = selectedLotId || 'B.04';
+  const price = config ? config.price : (document.getElementById('calcPriceText') ? document.getElementById('calcPriceText').textContent : 'Rp 650 Juta');
+  const scheme = config ? config.paymentScheme : (currentPaymentScheme === 'cash_tempo' ? `Cash Bertahap (${selectedTempoTenor} Bulan)` : currentPaymentScheme === 'kpr' ? 'KPR Bank (DP 30%)' : 'Cash Keras (Pelunasan 1 Bulan)');
+  const installment = config ? config.installment : (currentPaymentScheme === 'cash_tempo' ? 'Cicilan 0% ke Developer' : currentPaymentScheme === 'kpr' ? 'Rp 3,8 jt / bln' : 'Pelunasan 30 Hari');
+
+  const r1 = document.getElementById('roomName1') ? document.getElementById('roomName1').value : 'Kamar Tidur Utama';
+  const r2 = document.getElementById('roomName2') ? document.getElementById('roomName2').value : 'Kamar Anak Montessori';
+  const r3 = document.getElementById('roomName3') ? document.getElementById('roomName3').value : 'Studio Kreatif & Library';
+  const rGarden = document.getElementById('roomNameGarden') ? document.getElementById('roomNameGarden').value : 'Taman Kering Zen & BBQ';
+
+  const addonsSelected = [];
+  if (document.getElementById('addonIsland') && document.getElementById('addonIsland').checked) addonsSelected.push('Kitchen Island');
+  if (document.getElementById('addonSmart') && document.getElementById('addonSmart').checked) addonsSelected.push('Smart Home Automation');
+  if (document.getElementById('addonBathtub') && document.getElementById('addonBathtub').checked) addonsSelected.push('Freestanding Bathtub');
+  if (document.getElementById('addonSolar') && document.getElementById('addonSolar').checked) addonsSelected.push('Solar Canopy Carport');
+  const addonsText = addonsSelected.length > 0 ? addonsSelected.join(', ') : 'Spesifikasi Standar Japandi (Tanpa Tambahan)';
+
+  return {
+    unitName: unit.name,
+    unitTag: unit.tag || 'Arsitektur Japandi Modern 2 Lantai',
+    lot,
+    price,
+    scheme,
+    installment,
+    r1, r2, r3, rGarden,
+    addonsText
+  };
+}
+
+function shareSavedHouseConfiguration(channel) {
+  const summary = getHouseConfigurationSummary();
+
+  const formattedMessage =
+`🏡 *Rancangan Rumah Idaman Kita — The Park Townhouse*
+_Avenue Grand Gate · Sukoharjo_
+
+✨ *Pilihan Tipe Unit:* ${summary.unitName} (${summary.unitTag})
+📍 *Kavling:* ${summary.lot}
+💰 *Estimasi Nilai:* ${summary.price}
+💳 *Rencana Pembayaran:* ${summary.scheme}
+📅 *Estimasi Angsuran:* ${summary.installment}
+
+🛋️ *Rencana Tata Ruang Kustom:*
+• Lt 1: ${summary.r1}
+• Lt 2: ${summary.r2}
+• Lt 2: ${summary.r3}
+• Taman: ${summary.rGarden}
+
+🌿 *Opsi Tambahan:* ${summary.addonsText}
+
+Bagaimana menurutmu? Coba lihat dan kita diskusikan bersama yuk:
+https://theparktownhouse.com`;
+
+  if (channel === 'family') {
+    const waUrl = `https://api.whatsapp.com/send?text=${encodeURIComponent(formattedMessage)}`;
+    window.open(waUrl, '_blank');
+    showShareToast('Membuka WhatsApp untuk dibagikan ke keluarga...');
+  } else if (channel === 'copy') {
+    if (navigator.clipboard && navigator.clipboard.writeText) {
+      navigator.clipboard.writeText(formattedMessage).then(() => {
+        showShareToast('✓ Ringkasan konfigurasi rumah tersalin! Siap dikirim ke keluarga.');
+      }).catch(() => {
+        window.prompt('Salin teks konfigurasi berikut untuk dibagikan:', formattedMessage);
+      });
+    } else {
+      window.prompt('Salin teks konfigurasi berikut untuk dibagikan:', formattedMessage);
+    }
+  } else if (channel === 'print') {
+    window.print();
+  }
+}
+
+function showShareToast(message) {
+  let toast = document.getElementById('shareFeedbackToast');
+  if (!toast) {
+    toast = document.createElement('div');
+    toast.id = 'shareFeedbackToast';
+    toast.className = 'share-feedback-toast';
+    document.body.appendChild(toast);
+  }
+  toast.innerHTML = `<span class="share-toast-icon">✨</span> <span>${message}</span>`;
+  toast.classList.add('is-active');
+  setTimeout(() => {
+    toast.classList.remove('is-active');
+  }, 3500);
+}
+
 function demoAppAction(actionType) {
   const responses = {
     lock: '[Smart Lock] Pintu Utama Terbuka — Sensor BLE/IoT mengenali ponsel Anda dalam radius 5 meter.',
@@ -3388,7 +3480,7 @@ function switchHospSimType(type) {
     if (roiYear) roiYear.textContent = '23.0%';
     if (rentYield) rentYield.textContent = '6.9%';
     if (totalProfit) totalProfit.textContent = 'Rp 899.300.000';
-    if (profitBreakdown) profitBreakdown.textContent = 'Sewa Rp 270.000.000 + Capital Gain +Rp 629.300.000';
+    if (profitBreakdown) profitBreakdown.textContent = 'Manfaat Sewa Rp 270.000.000 + Apresiasi Kawasan +Rp 629.300.000';
   } else {
     if (unitPrice) unitPrice.textContent = 'Rp 498.278.753';
     if (rentPerMonth) rentPerMonth.textContent = 'Rp 3.000.000';
@@ -3396,7 +3488,7 @@ function switchHospSimType(type) {
     if (roiYear) roiYear.textContent = '22.2%';
     if (rentYield) rentYield.textContent = '7.2%';
     if (totalProfit) totalProfit.textContent = 'Rp 553.709.065';
-    if (profitBreakdown) profitBreakdown.textContent = 'Sewa Rp 180.000.000 + Capital Gain +Rp 373.709.065';
+    if (profitBreakdown) profitBreakdown.textContent = 'Manfaat Sewa Rp 180.000.000 + Apresiasi Kawasan +Rp 373.709.065';
   }
 }
 
@@ -5246,6 +5338,20 @@ function selectBerandaLot(lotId, clusterKey) {
     const el = document.getElementById(id);
     if (el) el.textContent = lot.price;
   });
+
+  // 3D Digital Twin: Update Holographic Volumetric Light Pillar Position
+  const twinOverlay = document.getElementById('berandaSpLotsOverlay');
+  if (twinOverlay && typeof lot.x !== 'undefined' && typeof lot.y !== 'undefined') {
+    let pillarEl = document.getElementById('twinActiveLightPillar');
+    if (!pillarEl) {
+      pillarEl = document.createElement('div');
+      pillarEl.id = 'twinActiveLightPillar';
+      pillarEl.className = 'twin-light-pillar';
+      twinOverlay.appendChild(pillarEl);
+    }
+    pillarEl.style.left = `${lot.x}%`;
+    pillarEl.style.top = `${lot.y}%`;
+  }
 }
 
 function orderInspectedLot() {
@@ -5275,24 +5381,159 @@ function switchBerandaInvestType(type, btnEl) {
 
   if (type === 'tipe60') {
     if (roiVal) roiVal.textContent = 'Rp 674.655.879';
-    if (roiPct) roiPct.textContent = '+135% Return on Investment';
+    if (roiPct) roiPct.textContent = 'Preservasi Nilai & Kenyamanan Terjamin';
     if (buyPrice) buyPrice.textContent = 'Rp 500.000.000';
     if (rentYield) rentYield.textContent = 'Rp 35.000.000 / thn';
     if (capGain) capGain.textContent = '15% / tahun';
     if (year5Val) year5Val.textContent = 'Rp 1.174.655.879';
-    if (annualized) annualized.textContent = '27.1% p.a.';
-    if (yieldRate) yieldRate.textContent = '6.9% / tahun';
+    if (annualized) annualized.textContent = '100% SHM Siap AJB';
+    if (yieldRate) yieldRate.textContent = 'Cash / Bertahap / KPR';
   } else {
     if (roiVal) roiVal.textContent = 'Rp 916.650.000';
-    if (roiPct) roiPct.textContent = '+135% Return on Investment';
+    if (roiPct) roiPct.textContent = 'Preservasi Nilai & Kenyamanan Terjamin';
     if (buyPrice) buyPrice.textContent = 'Rp 679.000.000';
     if (rentYield) rentYield.textContent = 'Rp 48.000.000 / thn';
     if (capGain) capGain.textContent = '15% / tahun';
     if (year5Val) year5Val.textContent = 'Rp 1.595.650.000';
-    if (annualized) annualized.textContent = '27.1% p.a.';
-    if (yieldRate) yieldRate.textContent = '7.1% / tahun';
+    if (annualized) annualized.textContent = '100% SHM Siap AJB';
+    if (yieldRate) yieldRate.textContent = 'Cash / Bertahap / KPR';
   }
 }
+
+/* ==========================================================================
+   OPENROUTER.AI-INSPIRED INTERACTIVE BERANDA CONTROLLER
+   ========================================================================== */
+function focusOpenRouterSearch() {
+  const inp = document.getElementById('openrouterSearchInput');
+  if (inp) {
+    inp.focus();
+    inp.select();
+  }
+}
+
+function handleOpenRouterSearch(query) {
+  const q = (query || '').toLowerCase().trim();
+  const cards = document.querySelectorAll('#openrouterModelGrid .or-model-card');
+  cards.forEach(card => {
+    if (!q) {
+      card.style.display = 'flex';
+      card.style.borderColor = '';
+      return;
+    }
+    const txt = card.textContent.toLowerCase();
+    const cluster = (card.getAttribute('data-cluster') || '').toLowerCase();
+    if (txt.includes(q) || cluster.includes(q)) {
+      card.style.display = 'flex';
+      card.style.borderColor = 'rgba(245, 207, 135, 0.85)';
+    } else {
+      card.style.display = 'none';
+      card.style.borderColor = '';
+    }
+  });
+}
+
+function filterOpenRouterUnits(clusterKey, btnEl) {
+  if (btnEl && btnEl.parentElement) {
+    btnEl.parentElement.querySelectorAll('.cluster-pill-btn').forEach(b => b.classList.remove('is-active'));
+    btnEl.classList.add('is-active');
+  }
+
+  const cards = document.querySelectorAll('#openrouterModelGrid .or-model-card');
+  cards.forEach(card => {
+    const cl = card.getAttribute('data-cluster');
+    if (clusterKey === 'all' || cl === clusterKey) {
+      card.style.display = 'flex';
+      card.style.opacity = '1';
+    } else {
+      card.style.display = 'none';
+    }
+  });
+
+  if (clusterKey !== 'all' && clusterKey !== 'clubhouse') {
+    currentBerandaLotCluster = clusterKey;
+  }
+}
+
+const SMART_ROUTER_DATA = {
+  family: {
+    input: 'Keluarga Muda',
+    output: 'Nagoya Gold',
+    unit: 'Nagoya Gold B.02 (LB 75 m²)',
+    saving: 'Hemat Rp 35.000.000 (Early Bird)',
+    kpr: 'Mulai Rp 3,2 Jt / bulan',
+    legal: '100% SHM Pecah Langsung',
+    btn: '✓ Kunci Unit Nagoya Gold B.02',
+    cluster: 'nagoya',
+    lotId: 'A.02'
+  },
+  invest: {
+    input: 'Ketenangan Privat',
+    output: 'Tokyo Prime',
+    unit: 'Tokyo Prime B.03 (LB 80 m²)',
+    saving: 'Preservasi Nilai Abadi + Opsi Sewa Terkelola',
+    kpr: 'Mulai Rp 3,8 Jt / bulan',
+    legal: '100% SHM Pecah Siap AJB',
+    btn: '✓ Kunci Unit Tokyo Prime B.03',
+    cluster: 'tokyo',
+    lotId: 'B.03'
+  },
+  exec: {
+    input: 'Keluarga 4 Kamar',
+    output: 'Osaka Diamond',
+    unit: 'Osaka Diamond A.09 (LB 110 m² · 2 Garasi)',
+    saving: 'Hemat Rp 50.000.000 Presale Flagship',
+    kpr: 'Mulai Rp 5,6 Jt / bulan',
+    legal: '100% SHM Siap Balik Nama',
+    btn: '✓ Kunci Unit Osaka Diamond A.09',
+    cluster: 'osaka',
+    lotId: 'A.09'
+  }
+};
+
+let currentRouterPersona = 'family';
+
+function switchSmartRouterPersona(personaKey, btnEl) {
+  currentRouterPersona = personaKey;
+  const data = SMART_ROUTER_DATA[personaKey] || SMART_ROUTER_DATA.family;
+
+  if (btnEl && btnEl.parentElement) {
+    btnEl.parentElement.querySelectorAll('.or-persona-btn').forEach(b => b.classList.remove('is-active'));
+    btnEl.classList.add('is-active');
+  }
+
+  const inEl = document.getElementById('routerNodeInput');
+  const outEl = document.getElementById('routerNodeOutput');
+  const unitEl = document.getElementById('routerValUnit');
+  const savEl = document.getElementById('routerValSaving');
+  const kprEl = document.getElementById('routerValKpr');
+  const legEl = document.getElementById('routerValLegal');
+  const btnTxt = document.getElementById('routerBtnText');
+
+  if (inEl) inEl.textContent = data.input;
+  if (outEl) outEl.textContent = data.output;
+  if (unitEl) unitEl.textContent = data.unit;
+  if (savEl) savEl.textContent = data.saving;
+  if (kprEl) kprEl.textContent = data.kpr;
+  if (legEl) legEl.textContent = data.legal;
+  if (btnTxt) btnTxt.textContent = data.btn;
+
+  const actionBtn = document.getElementById('routerActionBtn');
+  if (actionBtn) {
+    actionBtn.onclick = function() {
+      switchBerandaLotCluster(data.cluster);
+      selectBerandaLot(data.lotId, data.cluster);
+      orderInspectedLot();
+    };
+  }
+}
+
+// ⌘K Keyboard Shortcut Listener
+document.addEventListener('keydown', function(e) {
+  if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
+    e.preventDefault();
+    focusOpenRouterSearch();
+  }
+});
 
 /* About 5-Tabs Switcher */
 function switchBerandaAboutTab(tabName, btnEl) {
