@@ -6015,4 +6015,18 @@
     3. Remove overlay from flow on complete (`closingOverlay.style.display = 'none'`).
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #131: Harmonize Siteplan Metrics Card (Equal Columns & Symmetrical Layout)
+- **Context & Objective**: Per user screenshot (`media_1795497006067_8c5d02b3.png`), resolve awkward multi-line text wrapping ("SARANA & FASILITAS" and "RTH KAWASAN"), uneven column widths, and misaligned vertical dividers in the site plan metrics card.
+- **Key Changes Implemented**:
+  - **Single-Line Label Nomenclature (`index.html`)**:
+    - Simplified and standardized labels to concise single-line architectural terms: `Kavling`, `Prasarana`, `Fasilitas`, and `RTH`.
+  - **Symmetrical 4-Column Auto-Layout & Centering (`styles.css`)**:
+    - Replaced asymmetrical columns (`0.85fr 1.05fr 1.25fr 0.95fr`) with equal `repeat(4, 1fr) !important;`.
+    - Centered content horizontally and vertically (`align-items: center; justify-content: center; text-align: center;`) with `white-space: nowrap;`.
+    - Uniform divider lines (`border-right: 1px solid #eae4d8;`) now segment the card into 4 perfectly balanced quadrants with zero blank trailing space.
+- **Status**: Completed & Verified.
+
+
 
