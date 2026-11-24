@@ -6100,5 +6100,19 @@
     - Synchronized `switchBerandaShowcaseCluster()` (`app.js`) to format `${data.beds} KT`, `${data.baths} KM`, and `Semua Unit` dynamically.
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #137: Restore Natural Screen Margins on Horizontal Product & Facility Carousels
+- **Context & Objective**: Per user request ("kenapa tidak ada margin nya") referencing `media_1795506387791_7fc7cd27.jpg`, resolve issue where horizontal swipe product cards (`.product-card-item`) were flush against the screen bezel (0px left margin) without proper breathing room.
+- **Root Cause**:
+  - `.product-cards-grid`, `.facilities-six-grid`, and `.cluster-triptych-grid` had negative horizontal margins (`margin-left: -12px !important; margin-right: -12px !important;`). This cancelled out the parent container's 12px padding and, combined with `scroll-snap-type: x mandatory`, forced cards to snap flush against the physical left screen bezel.
+- **Key Changes Implemented (`styles.css`)**:
+  - **Removed Negative Margins & Restored Inset (`styles.css`)**:
+    - Removed `margin-left: -12px; margin-right: -12px;` across `.product-cards-grid`, `.facilities-six-grid`, and `.cluster-triptych-grid`.
+    - Set `margin: 0 !important;` and balanced internal padding (`padding: 4px 2px 14px 2px !important;`).
+    - Cards now inherit the natural 12-14px screen margin of `.landing-content-scroll`, aligning perfectly with the section headers above ("KATALOG PRODUK UTAMA", "Pilihan Tipe Produk Hunian") while allowing subsequent cards to peek smoothly on the right edge.
+- **Status**: Completed & Verified.
+
+
 
 
