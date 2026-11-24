@@ -5999,6 +5999,18 @@
     - Confirmed `.siteplan-navbar-header` renders with spacious two-tier layout (`flex-direction: column !important; min-height: 82px;`).
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #126: Fasilitas Navbar Two-Tier Stack & Dedicated Flex Order
+- **Context & Objective**: Per user request ("buat agar slide barnya berada di bawahnya, tulisan fasiloitas, dan formatnya berada si tengah" referencing `media_1795490602817_330926dd.png`), position "Fasilitas" centered on top and the subpage pill slider (Clubhouse, Super App, Hospitality) centered directly below it.
+- **Key Changes Implemented**:
+  - **Explicit Two-Tier Ordering (`styles.css`)**:
+    - Locked `.fasilitas-nav-title` to `order: 1 !important; width: 100% !important; text-align: center !important; margin: 0 auto !important; display: block !important;` (always line 1 on top).
+    - Locked `.fasilitas-subpage-header .fasilitas-subpage-pills` to `order: 2 !important; margin: 0 auto !important;` (always line 2 below).
+    - Confirmed `.fasilitas-subpage-header` has `flex-direction: column !important; align-items: center !important; justify-content: center !important; min-height: 82px;`.
+- **Status**: Completed & Verified.
+
+
 
 
 

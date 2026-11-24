@@ -7695,6 +7695,19 @@ body {
   box-shadow: 0 4px 18px rgba(0, 0, 0, 0.35) !important;
 }
 
+.fasilitas-nav-title {
+  display: block !important;
+  width: 100% !important;
+  text-align: center !important;
+  margin: 0 auto !important;
+  order: 1 !important;
+}
+
+.fasilitas-subpage-header .fasilitas-subpage-pills {
+  order: 2 !important;
+  margin: 0 auto !important;
+}
+
 .surat-navbar-header {
   position: sticky;
   top: 0;
