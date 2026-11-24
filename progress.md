@@ -5988,6 +5988,18 @@
     - Guaranteed `.surat-navbar-header` centers the headline across all viewport widths.
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #125: Masterplan Navbar Two-Tier Stack & Explicit Flex Order
+- **Context & Objective**: Resolve user request ("kenaoa gni, buat tulisannya berada di atas dan nagiya osaka tokyo berada di bawahnya" referencing `media_1795490559711_c1250cee.png`) where "Masterplan" and the cluster pills (Nagoya, Osaka, Tokyo) were displayed side-by-side on older renders.
+- **Key Changes Implemented**:
+  - **Explicit Flex Ordering (`styles.css`)**:
+    - Assigned `order: 1 !important; margin: 0 auto !important; width: 100% !important; text-align: center !important;` to `.siteplan-nav-title` and all subpage titles, locking headlines strictly above on line 1.
+    - Assigned `order: 2 !important; margin: 0 auto !important;` to `#siteplanClusterTabs` and subpage pill containers, locking pills strictly below on line 2.
+    - Confirmed `.siteplan-navbar-header` renders with spacious two-tier layout (`flex-direction: column !important; min-height: 82px;`).
+- **Status**: Completed & Verified.
+
+
 
 
 
