@@ -5978,6 +5978,17 @@
     - Active pill renders crisp solid white with `#11332a` bold text, while inactive pills render soft ivory text (`rgba(245, 242, 235, 0.85)`).
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #124: Center Align Surat Cinta Navbar Title
+- **Context & Objective**: Resolve user request ("buat tulidannya berada di tengah" referencing `media_1795490541098_abc90262.png`) where "Telusuri 11 Tema Keunggulan" in `.surat-navbar-header` was aligned to the left.
+- **Key Changes Implemented**:
+  - **Centered Typography (`styles.css`)**:
+    - Added `width: 100% !important; text-align: center !important; margin: 0 auto !important; display: block !important;` to `.surat-nav-title` (and all subpage nav titles).
+    - Guaranteed `.surat-navbar-header` centers the headline across all viewport widths.
+- **Status**: Completed & Verified.
+
+
 
 
 
