@@ -2028,9 +2028,9 @@ function switchBerandaShowcaseCluster(clusterKey, btnEl) {
   if (statAvail) statAvail.textContent = `${data.avail} Unit`;
   if (statLb) statLb.textContent = data.lb;
   if (statLt) statLt.textContent = data.lt;
-  if (statBeds) statBeds.textContent = data.beds;
-  if (statBaths) statBaths.textContent = data.baths;
-  if (seeAllLbl) seeAllLbl.textContent = 'Lihat Semua';
+  if (statBeds) statBeds.textContent = `${data.beds} KT`;
+  if (statBaths) statBaths.textContent = `${data.baths} KM`;
+  if (seeAllLbl) seeAllLbl.textContent = 'Semua Unit';
 
   const carousel = document.getElementById('berandaUnitsCarousel');
   if (carousel) {

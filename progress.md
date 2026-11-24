@@ -6085,4 +6085,20 @@
     - Synchronized dynamic cluster updater in `switchBerandaShowcaseCluster()` (`app.js`) to render `${data.avail} Unit` and `Lihat Semua` across all clusters (Nagoya, Tokyo, Osaka).
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #136: Refine Specification Micro-Card Geometry & Non-Truncating Typography
+- **Context & Objective**: Per user request ("perbaiki layout ini") referencing `media_1795505959963_b55a355d.png`, eliminate horizontal starvation and remove `text-overflow: ellipsis` truncation completely across all 6 spec cells.
+- **Key Changes Implemented**:
+  - **Refined Geometry & Space Reclamation (`styles.css`)**:
+    - Optimized icon badge from 24px down to 22×22px (SVG 12px) with compact `gap: 4px` and tightened container padding (`10px 8px`, `column-gap: 4px`), reclaiming +30px of usable inline width.
+    - Set metric typography to `10px` bold (`strong`) and caption labels to `7.5px` uppercase (`span`, letter-spacing 0.02em).
+    - Removed `overflow: hidden; text-overflow: ellipsis;` to ensure full un-clipped text presentation.
+  - **Balanced Metric Labels (`index.html`, `app.js`)**:
+    - Standardized bedroom and bathroom stats to standard real estate notation: `3-4 KT` / `K. TIDUR` and `2-3 KM` / `K. MANDI`.
+    - Standardized catalog CTA action tile to `Semua Unit` / `KATALOG`.
+    - Synchronized `switchBerandaShowcaseCluster()` (`app.js`) to format `${data.beds} KT`, `${data.baths} KM`, and `Semua Unit` dynamically.
+- **Status**: Completed & Verified.
+
+
 
