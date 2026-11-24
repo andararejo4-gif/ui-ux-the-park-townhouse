@@ -6130,7 +6130,17 @@
     - Harmonized status badges (`.badge-ready`, `.badge-exclusive`, `.kavling-label`, `.kavling-status-badge`) with brand tokens (forest sage and warm champagne gold), removing generic bootstrap/material colors.
 - **Status**: Completed & Verified.
 
+---
 
-
-
+### [2026-11-24] Progress #139: Reposition "Semua Unit Katalog" Underneath Specification Grid
+- **Context & Objective**: Per user request ("buat agar tulisan semua unit katalog beradda di bawah tulisan lainnya") referencing `media_1795507072666_e36a1b23.png`, move the catalog CTA button ("Semua Unit / KATALOG") from sitting inline inside the specification row next to bathroom count to its own dedicated full-width strip underneath all 5 unit specifications.
+- **Key Changes Implemented**:
+  - **Structural Separation (`index.html`)**:
+    - Created `.showcase-stats-grid` wrapping the 5 primary property specifications (`14 Unit / TERSEDIA`, `60 / 80 m² / LB MULAI`, `63–99 m² / LT MULAI`, `3-4 KT / K. TIDUR`, `2-3 KM / K. MANDI`).
+    - Positioned `.showcase-action-cell` outside and beneath `.showcase-stats-grid` within `.showcase-summary-bar`.
+  - **Dedicated Bottom Action Strip Styling (`styles.css`)**:
+    - Converted `.showcase-summary-bar` to flex column container with balanced gap and padding (`10px 10px 8px 10px`).
+    - Styled `.showcase-stats-grid` as responsive 3-column (mobile) / 5-column (desktop) grid, giving the 5 specifications ample space without squeezing.
+    - Styled `.showcase-action-cell` as full-width interactive action banner at the bottom with warm cream background (`#faf6ee`), hairline divider (`#f0eae1`), rounded 9px corners, golden arrow badge, and distinct `Semua Unit` with micro-tag `KATALOG UNIT`.
+- **Status**: Completed & Verified.
 
