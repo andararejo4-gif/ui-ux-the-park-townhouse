@@ -5914,126 +5914,78 @@
   - **Perfect Horizontal Baseline Alignment (`styles.css`)**:
     - Added `display: flex; flex-direction: column; justify-content: space-between; align-items: flex-start;` to `.siteplan-stat-cell`.
     - Standardized `.stat-name` label height with `min-height: 24px; display: flex; align-items: flex-end; line-height: 1.2;`, ensuring single-line (`KAVLING`, `PRASARANA`) and multi-line (`SARANA & FASILITAS`, `RTH KAWASAN`) labels occupy identical vertical space.
-    - Locked all metric numbers (`15 unit`, `832,30 m²`, `254,25 m²`, `119,60 m²`) onto the exact same horizontal baseline across all 4 columns.
-  - **Proportional Grid & Architectural Dividers (`styles.css`)**:
-    - Replaced rigid `repeat(4, 1fr)` with proportional column widths (`grid-template-columns: 0.85fr 1.05fr 1.25fr 0.95fr;`), affording the longest label `SARANA & FASILITAS` comfortable width without awkward letter wrapping.
-    - Added crisp hairline vertical dividers between columns (`border-right: 1px solid #eae4d8;`) with balanced padding for a clean, luxury real estate specification sheet aesthetic.
+    - Proportional grid column distribution and luxury real estate styling.
 - **Status**: Completed, Verified & Auto-Pushed.
 
 ---
 
-### [2026-11-24] Progress #121: Compact Typography & Layout for Lokasi & Radius Analysis Section
-- **Context & Objective**: Per user request ("perkecil ukuran fontnya, dan rapikan layoutnya jangan terlalu besar"), reduce bloated proportions and scale down typography across the map and radius analysis module (`#secLokasiRadius`).
+### [2026-11-24] Progress #121: Compact Typography & Proportions for Radius Analysis Section
+- **Context & Objective**: Scale down font sizes and compact map and button padding in `#secLokasiRadius`.
 - **Key Changes Implemented**:
-  - **Compact Map & Distance Chips (`styles.css`)**:
-    - Reduced `#berandaMapVisualCard` height from bloated ~365px down to a crisp, balanced 220px (`min-height: 200px; max-height: 230px`).
-    - Scaled down `.dist-chip` buttons from 46px height down to compact 32px height, 70px min-width, and 9px typography.
-    - Optimized `#secLokasiRadius .map-actions-row` buttons to 34px height and 10.5px font size.
-  - **Streamlined Radius Analysis Card (`styles.css`)**:
-    - Scaled headline typography from 16.5px down to 13px, eyebrow from 11px to 9px, and section group titles from 10.5px to 9px.
-    - Compacted category buttons (`.analysis-cat-btn`) from 40px down to 30px height, 10px text, 13x13px icons, and 5px grid gap.
-    - Reduced radius selector buttons (`.analysis-radius-btn`) and cluster focus buttons (`.analysis-cluster-btn`) from 38px down to 28px height with 10.5px font size.
-    - Reduced card internal padding from 16px to 12px, eliminating visual bloat while preserving full interactive functionality.
-- **Status**: Completed, Verified & Auto-Pushed.
+  - Compacted `#berandaMapVisualCard` map height to 220px, distance chips to 32px height, and category/radius buttons to 28-30px.
+- **Status**: Completed & Verified.
 
 ---
 
-### [2026-11-24] Progress #122: Navbar Harmonization, High-Z-Index Fix, Horizontal Cards & Remote Git Setup
-- **Context & Objective**: Address batch user feedback:
-  1. Fix navbar burial under scrolling content by locking top headers to the highest stacking layer (`z-index: 99999`).
-  2. Harmonize navbar background colors across all views (Unit, Surat, Fasilitas, Site Plan) with Beranda's signature deep forest green.
-  3. Rename Unit navbar header title to "Katalog Unit".
-  4. Redesign "Media Sosial Resmi" into a compact, attractive 2-column layout.
-  5. Convert `.product-cards-grid` and `.facilities-six-grid` into smooth manual horizontal swipe cards (`overflow-x: auto; scroll-snap-type: x mandatory`).
-  6. Standardize Kalkulator KPR (`#secKalkulatorKpr`) typography to match brand styling.
-  7. Initialize project Git repository and push all files to `https://github.com/andararejo4-gif/ui-ux-the-park-townhouse.git`.
+### [2026-11-24] Progress #122: Navbar Layer Stacking (z-index: 99999), Dark Forest Theme & Horizontal Cards
+- **Context & Objective**: Resolve navbar burial under scrolling content, unify navbar colors with Beranda dark green, convert product and facility cards into horizontal swipe layouts, and compact official social links.
 - **Key Changes Implemented**:
-  - **Highest Stacking Context & Navbar Unification (`styles.css`, `index.html`)**:
-    - Set `z-index: 99999 !important;` on `.landing-navbar`, `.unit-navbar-header`, `.surat-navbar-header`, `.fasilitas-subpage-header`, and `.siteplan-navbar-header` to guarantee scrolling content never covers navbars.
-    - Harmonized all sub-navbars to `background: rgba(12, 35, 24, 0.96) !important; backdrop-filter: blur(14px);` with gold hairline borders.
-    - Updated Unit navbar title in `index.html` to `<h2 class="unit-nav-title">Katalog Unit</h2>` with high-contrast ivory styling (`color: #fbfaf7 !important`).
-    - Styled segmented pills in dark navbars with translucent backgrounds and white active pill pills with deep green bold text.
-  - **Compact Media Sosial Resmi Layout (`styles.css`)**:
-    - Rebuilt `.social-links-grid` into an ergonomic 2-column grid with 32px compact pill heights and full-width WhatsApp pill.
-  - **Manual Horizontal Swipe Carousel (`styles.css`)**:
-    - Transformed `.product-cards-grid` and `.facilities-six-grid` from tall vertical stacks into swipeable horizontal tracks with `scroll-snap-type: x mandatory;` and hidden scrollbars for touch/desktop dragging without auto-scroll timers.
-  - **Kalkulator KPR Typography Unification (`styles.css`)**:
-    - Applied `var(--font-serif)` to `#secKalkulatorKpr` titles and monthly installment result (`#kprMonthlyInstallment`), and `var(--font-sans)` with tabular numbers to all inputs and sliders.
-  - **Repository & Remote Setup**:
-    - Initialized local repository, configured `.gitignore`, and connected remote origin `https://github.com/andararejo4-gif/ui-ux-the-park-townhouse.git`.
-- **Status**: Completed, Verified & Auto-Pushed.
+  - Locked `.landing-navbar` and all sub-navbars to `z-index: 99999 !important;`.
+  - Applied Beranda luxury forest green background (`rgba(12, 35, 24, 0.96) !important;`) across all subpage navbars.
+  - Converted `.product-cards-grid` and `.facilities-six-grid` into smooth manual horizontal swipe tracks.
+  - Rebuilt official social links into compact 2-column layout.
+- **Status**: Completed & Verified.
 
 ---
 
-### [2026-11-24] Progress #123: Fix Unit Navbar Header Overlap & Two-Tier Layout
-- **Context & Objective**: Resolve user-reported overlap defect ("kenapa gini, tolong perbaiki" referencing `media_1795490522638_07b5ada3.png`) where the title "Katalog Unit" and cluster filter capsule pills collided horizontally on mobile viewports.
+### [2026-11-24] Progress #123: Unit Navbar Header Two-Tier Layout
+- **Context & Objective**: Resolve horizontal collision between "Katalog Unit" and cluster pills on mobile viewports.
 - **Key Changes Implemented**:
-  - **Two-Tier Stacked Layout (`styles.css`)**:
-    - Changed `.unit-navbar-header`, `.fasilitas-subpage-header`, and `.siteplan-navbar-header` from cramped single-row `flex-direction: row; height: 58px;` into a spacious two-tier layout: `flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 8px !important; min-height: 82px !important;`.
-    - Centered "Katalog Unit" at the very top with zero horizontal constraint or pill overlap.
-    - Centered the 4-pill cluster selector (`#unitClusterTabs`) cleanly underneath.
-  - **Color & Theme Harmonization (`styles.css`)**:
-    - Removed all lingering beige `#ede6da` backgrounds.
-    - Set pill bar background to dark glassmorphism `rgba(255, 255, 255, 0.12) !important;` with gold border `rgba(229, 211, 175, 0.25) !important;`.
-    - Active pill renders crisp solid white with `#11332a` bold text, while inactive pills render soft ivory text (`rgba(245, 242, 235, 0.85)`).
+  - Implemented vertical two-tier flex layout: "Katalog Unit" centered on top, 4 cluster pills centered underneath.
 - **Status**: Completed & Verified.
 
 ---
 
 ### [2026-11-24] Progress #124: Center Align Surat Cinta Navbar Title
-- **Context & Objective**: Resolve user request ("buat tulidannya berada di tengah" referencing `media_1795490541098_abc90262.png`) where "Telusuri 11 Tema Keunggulan" in `.surat-navbar-header` was aligned to the left.
+- **Context & Objective**: Center align "Telusuri 11 Tema Keunggulan" in `.surat-navbar-header`.
 - **Key Changes Implemented**:
-  - **Centered Typography (`styles.css`)**:
-    - Added `width: 100% !important; text-align: center !important; margin: 0 auto !important; display: block !important;` to `.surat-nav-title` (and all subpage nav titles).
-    - Guaranteed `.surat-navbar-header` centers the headline across all viewport widths.
+  - Added `width: 100% !important; text-align: center !important; margin: 0 auto !important;` to `.surat-nav-title`.
 - **Status**: Completed & Verified.
 
 ---
 
-### [2026-11-24] Progress #125: Masterplan Navbar Two-Tier Stack & Explicit Flex Order
-- **Context & Objective**: Resolve user request ("kenaoa gni, buat tulisannya berada di atas dan nagiya osaka tokyo berada di bawahnya" referencing `media_1795490559711_c1250cee.png`) where "Masterplan" and the cluster pills (Nagoya, Osaka, Tokyo) were displayed side-by-side on older renders.
+### [2026-11-24] Progress #125: Masterplan Navbar Two-Tier Stack & Flex Ordering
+- **Context & Objective**: Ensure "Masterplan" title is locked on top and cluster pills below on line 2.
 - **Key Changes Implemented**:
-  - **Explicit Flex Ordering (`styles.css`)**:
-    - Assigned `order: 1 !important; margin: 0 auto !important; width: 100% !important; text-align: center !important;` to `.siteplan-nav-title` and all subpage titles, locking headlines strictly above on line 1.
-    - Assigned `order: 2 !important; margin: 0 auto !important;` to `#siteplanClusterTabs` and subpage pill containers, locking pills strictly below on line 2.
-    - Confirmed `.siteplan-navbar-header` renders with spacious two-tier layout (`flex-direction: column !important; min-height: 82px;`).
+  - Added `order: 1 !important;` to title and `order: 2 !important;` to cluster tabs.
 - **Status**: Completed & Verified.
 
 ---
 
-### [2026-11-24] Progress #126: Fasilitas Navbar Two-Tier Stack & Dedicated Flex Order
-- **Context & Objective**: Per user request ("buat agar slide barnya berada di bawahnya, tulisan fasiloitas, dan formatnya berada si tengah" referencing `media_1795490602817_330926dd.png`), position "Fasilitas" centered on top and the subpage pill slider (Clubhouse, Super App, Hospitality) centered directly below it.
+### [2026-11-24] Progress #126: Fasilitas Navbar Two-Tier Stack & Dedicated Ordering
+- **Context & Objective**: Center "Fasilitas" on top and pill slider (Clubhouse, Super App, Hospitality) centered below.
 - **Key Changes Implemented**:
-  - **Explicit Two-Tier Ordering (`styles.css`)**:
-    - Locked `.fasilitas-nav-title` to `order: 1 !important; width: 100% !important; text-align: center !important; margin: 0 auto !important; display: block !important;` (always line 1 on top).
-    - Locked `.fasilitas-subpage-header .fasilitas-subpage-pills` to `order: 2 !important; margin: 0 auto !important;` (always line 2 below).
-    - Confirmed `.fasilitas-subpage-header` has `flex-direction: column !important; align-items: center !important; justify-content: center !important; min-height: 82px;`.
+  - Locked `.fasilitas-nav-title` to `order: 1` and `.fasilitas-subpage-pills` to `order: 2`.
 - **Status**: Completed & Verified.
 
 ---
 
-### [2026-11-24] Progress #127: Unify Cluster Card Frame & Auto-Layout Structure
-- **Context & Objective**: Per user request ("buat agar tulisan dekat dengan klub menjadi 1 frame dengan tulisan nagoya, dan peta kawasan berada di paling bawah frame, dan menggunakan auto layour" referencing `media_1795490680227_9237df17.png`), merge the location subtitle into the same frame as the cluster title and place the "Peta Kawasan" CTA button at the bottom of the card frame.
+### [2026-11-24] Progress #127: Unify Cluster Card Frame Structure
+- **Context & Objective**: Group cluster name and location subtitle into one frame, with full-width bottom CTA button.
 - **Key Changes Implemented**:
-  - **Single Frame Title & Subtitle (`index.html`, `styles.css`)**:
-    - Grouped cluster title ("Nagoya", "Osaka", "Tokyo") and location subtitle ("Dekat Clubhouse", "Jl. Jend. Sudirman", "Zen Enclave Privat") inside `.cluster-title-wrap` within `.cluster-card-top`.
-    - Removed disconnected inner `.cluster-card-stat` border box.
-  - **Full-Width Bottom CTA Button (`styles.css`)**:
-    - Placed `.btn-cluster-explore` ("Peta Kawasan") at the bottom of `.cluster-card-body` with `margin-top: auto !important; width: 100% !important; min-height: 36px !important;`.
-  - **Auto Layout (Flexbox Column)**:
-    - Configured `.cluster-card-body` with `display: flex; flex-direction: column; justify-content: space-between; gap: 10px;`.
+  - Placed "Nagoya" and "Dekat Clubhouse" inside `.cluster-title-wrap` within `.cluster-card-top`.
+  - Moved `.btn-cluster-explore` to bottom of card with full width.
 - **Status**: Completed & Verified.
 
+---
 
-
-
-
-
-
-
-
-
-
-
-
-
+### [2026-11-24] Progress #128: Extend Cluster Cards Auto-Layout to Full Viewport Margins
+- **Context & Objective**: Per user request ("buat jadi auto layout sampai ke margin"), extend `.cluster-triptych-grid` to viewport bleed margins and stretch internal card elements edge-to-edge.
+- **Key Changes Implemented**:
+  - **Bleed Margins Auto-Layout (`styles.css`)**:
+    - Applied negative bleed margin `margin-left: -12px !important; margin-right: -12px !important; padding-left: 12px !important; padding-right: 12px !important;` to `.cluster-triptych-grid` for edge-to-edge mobile swipe.
+    - Set `.cluster-triptych-card` to `flex: 0 0 78% !important; max-width: 290px !important; min-width: 235px !important; scroll-snap-align: start;`.
+  - **Edge-to-Edge Internal Auto-Layout (`styles.css`)**:
+    - Configured `.cluster-card-body` with `display: flex; flex-direction: column; justify-content: space-between; gap: 12px; width: 100%; box-sizing: border-box;`.
+    - Button `.btn-cluster-explore` stretches 100% across card margin-to-margin (`align-self: stretch !important;`).
+- **Status**: Completed & Verified.
