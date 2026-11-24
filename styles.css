@@ -4537,10 +4537,10 @@ body {
 
 .product-card-item {
   background: #ffffff;
-  border: 1.5px solid #e2dacb;
+  border: 1px solid rgba(226, 218, 203, 0.85);
   border-radius: 18px;
   overflow: hidden;
-  box-shadow: 0 4px 20px rgba(22, 36, 28, 0.05);
+  box-shadow: 0 4px 18px rgba(17, 51, 42, 0.06), 0 1px 3px rgba(0, 0, 0, 0.03);
   display: flex;
   flex-direction: column;
   transition: transform 0.25s ease, box-shadow 0.25s ease;
@@ -4549,8 +4549,8 @@ body {
 
 .product-card-item:hover {
   transform: translateY(-2px);
-  box-shadow: 0 10px 28px rgba(22, 36, 28, 0.09);
-  border-color: #d1c7b3;
+  box-shadow: 0 10px 28px rgba(17, 51, 42, 0.1);
+  border-color: #c5a874;
 }
 
 .product-card-badge-row {
@@ -4563,32 +4563,34 @@ body {
 }
 
 .badge-ready {
-  font-size: 10px;
-  font-weight: 700;
-  padding: 3px 9px;
-  border-radius: 6px;
-  background: #e8f5e9;
-  color: #1b5e20;
-  border: 1px solid #c8e6c9;
+  font-family: var(--font-sans);
+  font-size: 9.5px;
+  font-weight: 600;
+  padding: 3px 10px;
+  border-radius: 999px;
+  background: #edf4ef;
+  color: #11332a;
+  border: 1px solid rgba(26, 77, 54, 0.2);
 }
 
 .badge-exclusive {
-  background: #fff8e1;
-  color: #b78103;
-  border-color: #ffe082;
+  background: #fbf6ec;
+  color: #8c6b2d;
+  border: 1px solid rgba(197, 160, 89, 0.35);
 }
 
 .badge-royal {
-  background: #ede7f6;
-  color: #512da8;
-  border-color: #d1c4e9;
+  background: #f7f1e1;
+  color: #7c5d22;
+  border: 1px solid rgba(179, 142, 68, 0.4);
 }
 
 .badge-cluster {
-  font-size: 10.5px;
-  font-weight: 600;
-  color: #5c6860;
-  letter-spacing: 0.02em;
+  font-family: var(--font-sans);
+  font-size: 10px;
+  font-weight: 700;
+  color: #8c6b2d;
+  letter-spacing: 0.05em;
 }
 
 .product-card-img-wrap {
@@ -9154,42 +9156,55 @@ body {
 /* 3. Section Cards */
 .landing-section-card {
   background: #ffffff;
-  border: 1px solid #e8e2d5;
-  border-radius: 12px;
-  padding: 12px 14px;
+  border: 1px solid rgba(226, 219, 205, 0.9);
+  border-radius: 16px;
+  padding: 14px 16px;
   display: flex;
   flex-direction: column;
-  gap: 10px;
-  box-shadow: 0 2px 10px rgba(22, 36, 28, 0.04);
+  gap: 12px;
+  box-shadow: 0 1px 3px rgba(17, 51, 42, 0.02), 0 8px 24px rgba(17, 51, 42, 0.045);
+  box-sizing: border-box;
 }
 
 .section-card-head {
   display: flex;
   flex-direction: column;
-  gap: 3px;
+  gap: 4px;
 }
 
 .section-tag-gold {
-  font-size: 9px;
+  display: inline-flex;
+  align-items: center;
+  width: fit-content;
+  font-family: var(--font-sans);
+  font-size: 8.5px;
   font-weight: 700;
-  letter-spacing: 0.1em;
+  letter-spacing: 0.12em;
   text-transform: uppercase;
-  color: #9d7837;
+  color: #8c6b2d;
+  background: linear-gradient(135deg, rgba(253, 248, 237, 0.95), rgba(247, 241, 227, 0.85));
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  border-radius: 999px;
+  padding: 3px 10px;
+  margin-bottom: 2px;
+  box-shadow: 0 1px 2px rgba(140, 107, 45, 0.06);
 }
 
 .section-card-title {
   font-family: var(--font-serif);
-  font-size: 16px;
-  font-weight: 700;
-  color: #16241c;
+  font-size: 18px;
+  font-weight: 600;
+  color: #11332a;
   margin: 0;
   line-height: 1.25;
+  letter-spacing: -0.01em;
 }
 
 .section-card-sub {
-  font-size: 11px;
-  line-height: 1.45;
-  color: #55635b;
+  font-family: var(--font-sans);
+  font-size: 11.5px;
+  line-height: 1.5;
+  color: #55665d;
   margin: 0;
 }
 
@@ -10759,10 +10774,10 @@ body {
 
 .sync-masterplan-card {
   background: #ffffff;
-  border: 1px solid #e8e2d5;
-  border-radius: 12px;
+  border: 1px solid rgba(226, 219, 205, 0.9);
+  border-radius: 16px;
   padding: 14px 16px;
-  box-shadow: 0 2px 10px rgba(22, 36, 28, 0.04);
+  box-shadow: 0 1px 3px rgba(17, 51, 42, 0.02), 0 8px 24px rgba(17, 51, 42, 0.045);
   box-sizing: border-box;
 }
 
@@ -10777,7 +10792,7 @@ body {
   min-height: 34px;
   height: 34px;
   padding: 0 12px;
-  border-radius: 8px;
+  border-radius: 999px;
   background: #fbfaf7;
   border: 1px solid #dcd4c3;
   color: #16241c;
@@ -10800,7 +10815,7 @@ body {
   border-color: #11332a;
   color: #ffffff;
   font-weight: 700;
-  box-shadow: 0 2px 8px rgba(17, 51, 42, 0.2);
+  box-shadow: 0 3px 10px rgba(17, 51, 42, 0.25);
 }
 
 .sync-masterplan-card .siteplan-header {
@@ -11037,11 +11052,11 @@ body {
 /* Selected Lot Inspector Card (Harmonized Japandi Modern) */
 .sync-masterplan-card .clean-frosted-card {
   background: #ffffff;
-  border: 1px solid #e8e2d5;
-  border-radius: 12px;
+  border: 1px solid rgba(226, 219, 205, 0.9);
+  border-radius: 14px;
   padding: 12px 14px;
   margin-top: 10px;
-  box-shadow: 0 2px 10px rgba(22, 36, 28, 0.04);
+  box-shadow: 0 1px 4px rgba(17, 51, 42, 0.04);
   display: flex;
   flex-direction: column;
   gap: 10px;
@@ -11058,13 +11073,14 @@ body {
 
 .sync-masterplan-card .kavling-label {
   font-family: var(--font-sans);
-  font-size: 9px;
+  font-size: 8.5px;
   letter-spacing: 0.1em;
   font-weight: 700;
-  color: #2e7d32;
-  background: rgba(46, 125, 50, 0.08);
-  padding: 2px 6px;
-  border-radius: 4px;
+  color: #8c6b2d;
+  background: linear-gradient(135deg, rgba(253, 248, 237, 0.95), rgba(247, 241, 227, 0.85));
+  border: 1px solid rgba(197, 160, 89, 0.35);
+  padding: 2px 8px;
+  border-radius: 999px;
   text-transform: uppercase;
   display: inline-block;
   margin-bottom: 2px;
@@ -11072,16 +11088,16 @@ body {
 
 .sync-masterplan-card .kavling-id-title {
   font-family: var(--font-serif);
-  font-size: 15px;
-  font-weight: 700;
-  color: #16241c;
+  font-size: 16px;
+  font-weight: 600;
+  color: #11332a;
   margin: 0;
   line-height: 1.25;
 }
 
 .sync-masterplan-card .kavling-status-badge {
   font-family: var(--font-sans);
-  font-size: 9.5px;
+  font-size: 9px;
   font-weight: 700;
   padding: 3px 10px;
   border-radius: 999px;
@@ -11090,14 +11106,15 @@ body {
 }
 
 .sync-masterplan-card .kavling-status-badge.status-available {
-  background: #e8f5e9;
-  color: #1b5e20;
-  border: 1px solid #a5d6a7;
+  background: #edf4ef;
+  color: #11332a;
+  border: 1px solid rgba(26, 77, 54, 0.25);
 }
 
 .sync-masterplan-card .kavling-status-badge.status-booked {
-  background: #fff8e1;
-  color: #b78103;
+  background: #fbf6ec;
+  color: #8c6b2d;
+  border: 1px solid rgba(197, 160, 89, 0.35);
   border: 1px solid #ffe082;
 }
 
@@ -14443,12 +14460,12 @@ body {
 .sa-card-action {
   background: linear-gradient(135deg, #11332a 0%, #1e4d40 100%) !important;
   color: #ffffff !important;
-  border: 1px solid rgba(17, 51, 42, 0.25) !important;
-  border-radius: 8px !important;
+  border: 1px solid rgba(229, 211, 175, 0.28) !important;
+  border-radius: 12px !important;
   font-family: var(--font-sans) !important;
   font-weight: 600 !important;
-  box-shadow: 0 2px 8px rgba(17, 51, 42, 0.18) !important;
-  transition: all 0.2s ease !important;
+  box-shadow: 0 3px 12px rgba(17, 51, 42, 0.2), inset 0 1px 1px rgba(255, 255, 255, 0.12) !important;
+  transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1) !important;
   cursor: pointer !important;
   text-decoration: none !important;
   box-sizing: border-box !important;
@@ -14526,7 +14543,7 @@ body {
   background: linear-gradient(135deg, #0d2720 0%, #173d32 100%) !important;
   color: #ffffff !important;
   transform: translateY(-1px) !important;
-  box-shadow: 0 4px 14px rgba(17, 51, 42, 0.28) !important;
+  box-shadow: 0 6px 18px rgba(17, 51, 42, 0.28), inset 0 1px 1px rgba(255, 255, 255, 0.18) !important;
 }
 
 /* Secondary Outline Button System (High-Contrast Forest Green on Clean White) */
@@ -14535,7 +14552,7 @@ body {
   background: #ffffff !important;
   color: #11332a !important;
   border: 1.5px solid #11332a !important;
-  border-radius: 8px !important;
+  border-radius: 12px !important;
   font-family: var(--font-sans) !important;
   font-weight: 600 !important;
   box-shadow: 0 1px 4px rgba(17, 51, 42, 0.08) !important;
