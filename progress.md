@@ -6157,3 +6157,17 @@
     - Standardized YouTube handle from verbose `The Park Townhouse Official` to consistent standard handle `@theparktownhouse` matching TikTok and Instagram.
     - Applied `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;` on `.social-name` and `.social-handle` to guarantee zero border collisions or horizontal leaks across small screens.
 - **Status**: Completed & Verified.
+
+---
+
+### [2026-11-24] Progress #141: Enrich Landing Sections with Luxury Architectural Visual Vignettes
+- **Context & Objective**: Per user request to elevate visual luxury and incorporate rich photography across sections, added authentic architectural vignette banners, refined typography, and elevated card styling.
+- **Key Changes Implemented**:
+  - **Cinematic Visual Vignette Banners (index.html)**:
+    - Fasilitas & Keamanan Kawasan: Added comfort-vignette-banner featuring entrance gate render (assets/drive/gate.png) with MAIN GATE & BOULEVARD champagne badge.
+    - 11 Pilar Keunggulan: Added comfort-vignette-banner featuring Japandi facade perspective (assets/drive/housee.jpeg) with JAPANDI ARCHITECTURAL EXCELLENCE badge.
+    - Kata Mereka (Testimoni): Added comfort-vignette-banner showcasing elegant living room interior (assets/drive/dalam-9.png) with WARM LIVING EXPERIENCE badge.
+  - **Luxury Styling & Micro-Interactions (styles.css)**:
+    - Styled .comfort-vignette-banner with 12px corners, champagne hairline border, ambient elevation, and smooth 1.04x hover zoom.
+    - Enhanced hover states across .comfort-feature-card and .testimonial-item with subtle lift, warm gold stars (#dfb96d), and champagne borders.
+- **Status**: Completed & Verified.
