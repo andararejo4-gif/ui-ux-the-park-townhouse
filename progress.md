@@ -6010,6 +6010,21 @@
     - Confirmed `.fasilitas-subpage-header` has `flex-direction: column !important; align-items: center !important; justify-content: center !important; min-height: 82px;`.
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #127: Unify Cluster Card Frame & Auto-Layout Structure
+- **Context & Objective**: Per user request ("buat agar tulisan dekat dengan klub menjadi 1 frame dengan tulisan nagoya, dan peta kawasan berada di paling bawah frame, dan menggunakan auto layour" referencing `media_1795490680227_9237df17.png`), merge the location subtitle into the same frame as the cluster title and place the "Peta Kawasan" CTA button at the bottom of the card frame.
+- **Key Changes Implemented**:
+  - **Single Frame Title & Subtitle (`index.html`, `styles.css`)**:
+    - Grouped cluster title ("Nagoya", "Osaka", "Tokyo") and location subtitle ("Dekat Clubhouse", "Jl. Jend. Sudirman", "Zen Enclave Privat") inside `.cluster-title-wrap` within `.cluster-card-top`.
+    - Removed disconnected inner `.cluster-card-stat` border box.
+  - **Full-Width Bottom CTA Button (`styles.css`)**:
+    - Placed `.btn-cluster-explore` ("Peta Kawasan") at the bottom of `.cluster-card-body` with `margin-top: auto !important; width: 100% !important; min-height: 36px !important;`.
+  - **Auto Layout (Flexbox Column)**:
+    - Configured `.cluster-card-body` with `display: flex; flex-direction: column; justify-content: space-between; gap: 10px;`.
+- **Status**: Completed & Verified.
+
+
 
 
 
