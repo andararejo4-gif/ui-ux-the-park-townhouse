@@ -5963,6 +5963,22 @@
     - Initialized local repository, configured `.gitignore`, and connected remote origin `https://github.com/andararejo4-gif/ui-ux-the-park-townhouse.git`.
 - **Status**: Completed, Verified & Auto-Pushed.
 
+---
+
+### [2026-11-24] Progress #123: Fix Unit Navbar Header Overlap & Two-Tier Layout
+- **Context & Objective**: Resolve user-reported overlap defect ("kenapa gini, tolong perbaiki" referencing `media_1795490522638_07b5ada3.png`) where the title "Katalog Unit" and cluster filter capsule pills collided horizontally on mobile viewports.
+- **Key Changes Implemented**:
+  - **Two-Tier Stacked Layout (`styles.css`)**:
+    - Changed `.unit-navbar-header`, `.fasilitas-subpage-header`, and `.siteplan-navbar-header` from cramped single-row `flex-direction: row; height: 58px;` into a spacious two-tier layout: `flex-direction: column !important; align-items: center !important; justify-content: center !important; gap: 8px !important; min-height: 82px !important;`.
+    - Centered "Katalog Unit" at the very top with zero horizontal constraint or pill overlap.
+    - Centered the 4-pill cluster selector (`#unitClusterTabs`) cleanly underneath.
+  - **Color & Theme Harmonization (`styles.css`)**:
+    - Removed all lingering beige `#ede6da` backgrounds.
+    - Set pill bar background to dark glassmorphism `rgba(255, 255, 255, 0.12) !important;` with gold border `rgba(229, 211, 175, 0.25) !important;`.
+    - Active pill renders crisp solid white with `#11332a` bold text, while inactive pills render soft ivory text (`rgba(245, 242, 235, 0.85)`).
+- **Status**: Completed & Verified.
+
+
 
 
 
