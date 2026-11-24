@@ -6055,7 +6055,17 @@
   - **Section Headings & Chips**: Scoped `#secLokasiRadius .section-card-title` to 15-17px, subtitle to 11px, `.dist-chip` to 10-10.5px with 4px vertical padding, and action buttons to 10.5px.
 - **Status**: Completed & Verified.
 
+---
 
-
-
+### [2026-11-24] Progress #134: Harmonize Siteplan Top Specs Box (Single-Line 2x2 Grid)
+- **Context & Objective**: Per user screenshot (`media_1795497479723_2ec19873.png`), resolve awkward multi-line text wrapping on "Sarana & Clubhouse" and its metric value "254,25 m²", which resulted in ragged row heights and baseline misalignment compared to neighboring metrics.
+- **Key Changes Implemented**:
+  - **Single-Line Label Alignment (`index.html`)**:
+    - Replaced elongated label `Sarana & Clubhouse` with concise standard architectural term `Fasilitas` in `.siteplan-top-specs-box` across both Beranda (`#secMasterPlan`) and Masterplan subpage (`#pageMasterPlan`).
+    - Standardized all 4 metric items (`Kavling`, `Prasarana`, `Fasilitas`, `RTH`) to balanced single-line representations.
+  - **Symmetrical 2x2 Grid Styling (`styles.css`)**:
+    - Enhanced `.siteplan-top-specs-box` and `.sync-masterplan-card .siteplan-top-specs-box` with `display: grid; grid-template-columns: repeat(2, 1fr); gap: 6px 14px;` and clean white container framing (`background: #ffffff; border: 1px solid #e8e2d5; border-radius: 12px; padding: 10px 14px;`).
+    - Enforced `white-space: nowrap !important;` on both label spans and value strong elements within `.sp-spec-item` to prevent line wrapping on narrow viewports.
+    - Balanced spacing (`margin-left: 6px; font-size: 11px;`) ensuring crisp alignment and uniform vertical heights across both rows.
+- **Status**: Completed & Verified.
 
