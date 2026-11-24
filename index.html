@@ -21,7 +21,7 @@
       <!-- ================================================================
            OPENING SEQUENCE OVERLAY (Realistic Architectural Door + Subtle Champagne Dust)
            ================================================================ -->
-      <div class="opening-overlay" id="openingOverlay" data-stage="idle" aria-hidden="false">
+      <div class="opening-overlay" id="openingOverlay" data-stage="waiting" aria-hidden="false" role="button" tabindex="0" title="Klik di mana saja untuk membuka pintu">
         <canvas id="sparkCanvas"></canvas>
         <div class="opening-ambient-glow"></div>
 
@@ -57,16 +57,6 @@
         </div>
 
         <p class="opening-caption" id="openingCaption">Setiap langkah jauh, selalu mencari jalan pulang…</p>
-
-        <!-- Tombol Buka Pintu Utama -->
-        <button class="btn-open-door" id="btnOpenDoor" type="button" onclick="startDoorOpeningSequence()"
-          title="Buka Pintu">
-          <span>Buka Pintu</span>
-        </button>
-
-        <button class="opening-skip-btn" id="skipOpeningBtn" type="button">
-          Lewati
-        </button>
       </div>
 
       <!-- ================================================================
@@ -685,87 +675,112 @@
           </div>
 
           <!-- SITE PLAN & PILIHAN KAVLING (Images 3, 4, 5) -->
-          <div class="room-card compact-card siteplan-card stagger-item" data-delay="360" id="siteplanCard">
-            <div class="siteplan-header">
-              <div class="siteplan-title-row">
-                <h3 class="siteplan-cluster-title" id="siteplanClusterTitle">Nagoya</h3>
-                <span class="siteplan-shm-badge" id="siteplanShmBadge">SHM sudah pecah sempurna (Nagoya)</span>
-              </div>
-              <div class="siteplan-tag-sub" id="siteplanTagSub">100 m dari Stadion · Nagoya Road 7 M · Clubhouse</div>
-              <div class="siteplan-area-sub" id="siteplanAreaSub">Cluster Nagoya · 2392 m²</div>
-            </div>
-
-            <!-- Site Plan Map with Clickable Kavlings -->
-            <div class="siteplan-map-container" id="siteplanMapContainer">
-              <img src="assets/drive/siteplan-nagoya.jpg" alt="Site Plan Kawasan Cluster" class="siteplan-img"
-                id="siteplanImg" />
-              <div class="siteplan-lots-overlay" id="siteplanLotsOverlay">
-                <!-- Dynamically rendered kavling interactive buttons -->
-              </div>
-            </div>
-
-            <!-- Dynamic Selected Kavling Card -->
-            <div class="kavling-detail-card" id="kavlingDetailCard">
-              <div class="kavling-detail-header">
-                <div>
-                  <span class="kavling-label">KAVLING TERPILIH</span>
-                  <h4 class="kavling-title" id="kavlingTitle">Nagoya B.04</h4>
+          <div class="room-card compact-card siteplan-card step-locked-blur stagger-item" data-delay="360" id="siteplanCard">
+            <!-- Blur Lock Curtain when Room Customization is not yet saved -->
+            <div class="step-lock-curtain" id="siteplanLockCurtain">
+              <div class="step-lock-card">
+                <div class="step-lock-icon">
+                  <svg viewBox="0 0 24 24" width="22" height="22" fill="none" stroke="currentColor" stroke-width="2">
+                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
+                    <path d="M7 11V7a5 5 0 0 1 10 0v4" />
+                  </svg>
                 </div>
-                <span class="kavling-status-badge" id="kavlingStatusBadge">Tersedia · Rekomendasi</span>
-              </div>
-
-              <div class="kavling-specs-row">
-                <div class="kavling-spec-col">
-                  <span>Luas Tanah</span>
-                  <strong id="kavlingAreaVal">90 m²</strong>
-                </div>
-                <div class="kavling-spec-col">
-                  <span>Tipe Rekomendasi</span>
-                  <strong id="kavlingTypeVal">Nagoya Gold (LB 75)</strong>
-                </div>
-                <div class="kavling-spec-col">
-                  <span>Estimasi Harga</span>
-                  <strong id="kavlingPriceVal">Rp 650 Juta</strong>
-                </div>
+                <span class="step-lock-tag">LANGKAH SELANJUTNYA</span>
+                <h4 class="step-lock-title">Site Plan &amp; Pilihan Kavling</h4>
+                <p class="step-lock-desc">
+                  Kustomisasi tata ruang dan denah di atas harus disimpan terlebih dahulu untuk membuka peta kawasan dan pemilihan kavling.
+                </p>
+                <button type="button" class="btn-step-unlock" onclick="saveRoomCustomization()">
+                  <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                  <span>Simpan Tata Ruang &amp; Buka Site Plan</span>
+                </button>
               </div>
             </div>
 
-            <!-- Clickable Kavling Lots Quick Selector -->
-            <div class="kavling-quick-selector">
-              <span class="filter-group-label">PILIH KAVLING DI SITE PLAN:</span>
-              <div class="kavling-pills-row" id="kavlingPillsRow">
-                <!-- Populated via JS based on selected unit cluster -->
+            <div class="siteplan-content-wrap">
+              <div class="siteplan-header">
+                <div class="siteplan-title-row">
+                  <h3 class="siteplan-cluster-title" id="siteplanClusterTitle">Nagoya</h3>
+                  <span class="siteplan-shm-badge" id="siteplanShmBadge">SHM sudah pecah sempurna (Nagoya)</span>
+                </div>
+                <div class="siteplan-tag-sub" id="siteplanTagSub">100 m dari Stadion · Nagoya Road 7 M · Clubhouse</div>
+                <div class="siteplan-area-sub" id="siteplanAreaSub">Cluster Nagoya · 2392 m²</div>
               </div>
-            </div>
 
-            <!-- Cluster Statistics Table (Images 3, 4, 5) -->
-            <div class="siteplan-stats-grid">
-              <div class="siteplan-stat-cell">
-                <span class="stat-name">Kavling</span>
-                <strong class="stat-number" id="statKavlingVal">15 unit</strong>
+              <!-- Site Plan Map with Clickable Kavlings -->
+              <div class="siteplan-map-container" id="siteplanMapContainer">
+                <img src="assets/drive/siteplan-nagoya.jpg" alt="Site Plan Kawasan Cluster" class="siteplan-img"
+                  id="siteplanImg" />
+                <div class="siteplan-lots-overlay" id="siteplanLotsOverlay">
+                  <!-- Dynamically rendered kavling interactive buttons -->
+                </div>
               </div>
-              <div class="siteplan-stat-cell">
-                <span class="stat-name">Prasarana</span>
-                <strong class="stat-number" id="statPrasaranaVal">832,30 m²</strong>
-              </div>
-              <div class="siteplan-stat-cell">
-                <span class="stat-name">Fasilitas</span>
-                <strong class="stat-number" id="statSaranaVal">254,25 m²</strong>
-              </div>
-              <div class="siteplan-stat-cell">
-                <span class="stat-name">RTH</span>
-                <strong class="stat-number" id="statRthVal">119,60 m²</strong>
-              </div>
-            </div>
 
-            <!-- Site Plan Confirmation Action -->
-            <div class="siteplan-actions">
-              <button class="btn-primary-forest btn-save-siteplan" id="btnSaveSiteplan" onclick="saveSiteplanChoice()"
-                type="button">
-                <span id="btnSaveSiteplanText">Konfirmasi &amp; Simpan Kavling</span>
-              </button>
-              <div class="custom-success-banner siteplan-success-banner" id="siteplanSuccessBanner" aria-live="polite">
-                <span id="siteplanSuccessText">Pilihan kavling tersimpan!</span>
+              <!-- Dynamic Selected Kavling Card -->
+              <div class="kavling-detail-card" id="kavlingDetailCard">
+                <div class="kavling-detail-header">
+                  <div>
+                    <span class="kavling-label">KAVLING TERPILIH</span>
+                    <h4 class="kavling-title" id="kavlingTitle">Nagoya B.04</h4>
+                  </div>
+                  <span class="kavling-status-badge" id="kavlingStatusBadge">Tersedia · Rekomendasi</span>
+                </div>
+
+                <div class="kavling-specs-row">
+                  <div class="kavling-spec-col">
+                    <span>Luas Tanah</span>
+                    <strong id="kavlingAreaVal">90 m²</strong>
+                  </div>
+                  <div class="kavling-spec-col">
+                    <span>Tipe Rekomendasi</span>
+                    <strong id="kavlingTypeVal">Nagoya Gold (LB 75)</strong>
+                  </div>
+                  <div class="kavling-spec-col">
+                    <span>Estimasi Harga</span>
+                    <strong id="kavlingPriceVal">Rp 650 Juta</strong>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Clickable Kavling Lots Quick Selector -->
+              <div class="kavling-quick-selector">
+                <span class="filter-group-label">PILIH KAVLING DI SITE PLAN:</span>
+                <div class="kavling-pills-row" id="kavlingPillsRow">
+                  <!-- Populated via JS based on selected unit cluster -->
+                </div>
+              </div>
+
+              <!-- Cluster Statistics Table (Images 3, 4, 5) -->
+              <div class="siteplan-stats-grid">
+                <div class="siteplan-stat-cell">
+                  <span class="stat-name">Kavling</span>
+                  <strong class="stat-number" id="statKavlingVal">15 unit</strong>
+                </div>
+                <div class="siteplan-stat-cell">
+                  <span class="stat-name">Prasarana</span>
+                  <strong class="stat-number" id="statPrasaranaVal">832,30 m²</strong>
+                </div>
+                <div class="siteplan-stat-cell">
+                  <span class="stat-name">Fasilitas</span>
+                  <strong class="stat-number" id="statSaranaVal">254,25 m²</strong>
+                </div>
+                <div class="siteplan-stat-cell">
+                  <span class="stat-name">RTH</span>
+                  <strong class="stat-number" id="statRthVal">119,60 m²</strong>
+                </div>
+              </div>
+
+              <!-- Site Plan Confirmation Action -->
+              <div class="siteplan-actions">
+                <button class="btn-primary-forest btn-save-siteplan" id="btnSaveSiteplan" onclick="saveSiteplanChoice()"
+                  type="button">
+                  <span id="btnSaveSiteplanText">Konfirmasi &amp; Simpan Kavling</span>
+                </button>
+                <div class="custom-success-banner siteplan-success-banner" id="siteplanSuccessBanner" aria-live="polite">
+                  <span id="siteplanSuccessText">Pilihan kavling tersimpan!</span>
+                </div>
               </div>
             </div>
           </div>
@@ -1031,7 +1046,7 @@
 
             <div class="room-nav-actions">
               <button class="btn-back-outline" onclick="goToRoom(5)" type="button" aria-label="Kembali">&lt;</button>
-              <button class="btn-primary-forest" onclick="goToRoom(7)" type="button">
+              <button class="btn-primary-forest" onclick="triggerFloatingKeyToRoom7()" type="button">
                 <span>Menuju Ruang Kunci</span>
               </button>
             </div>
@@ -1113,6 +1128,97 @@
       </main>
 
       <!-- ================================================================
+           FLOATING KEY ANIMATION OVERLAY (Transisi Menuju Ruang Kunci 07)
+           ================================================================ -->
+      <div class="floating-key-overlay" id="floatingKeyOverlay" aria-hidden="true" style="display: none;">
+        <div class="fkey-ambient-glow"></div>
+
+        <div class="fkey-scene-stage">
+          <!-- 3D Levitating Key Element with Luxury Gold Styling -->
+          <div class="fkey-levitate-wrap" id="fkeyLevitateWrap">
+            <svg class="fkey-svg" viewBox="0 0 160 220" width="160" height="220" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <defs>
+                <linearGradient id="goldKeyGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                  <stop offset="0%" stop-color="#fff9e6" />
+                  <stop offset="20%" stop-color="#f5e1a4" />
+                  <stop offset="45%" stop-color="#d4af37" />
+                  <stop offset="70%" stop-color="#9a7b20" />
+                  <stop offset="90%" stop-color="#e8cd78" />
+                  <stop offset="100%" stop-color="#fff5d0" />
+                </linearGradient>
+                <linearGradient id="goldKeyHighlight" x1="0%" y1="0%" x2="0%" y2="100%">
+                  <stop offset="0%" stop-color="#ffffff" stop-opacity="0.9" />
+                  <stop offset="50%" stop-color="#f7e6b5" stop-opacity="0.2" />
+                  <stop offset="100%" stop-color="#b8860b" stop-opacity="0.8" />
+                </linearGradient>
+                <linearGradient id="goldKeyDark" x1="0%" y1="0%" x2="100%" y2="0%">
+                  <stop offset="0%" stop-color="#5a420b" />
+                  <stop offset="50%" stop-color="#9a7516" />
+                  <stop offset="100%" stop-color="#3d2a04" />
+                </linearGradient>
+                <filter id="goldKeyGlow" x="-20%" y="-20%" width="140%" height="140%">
+                  <feGaussianBlur stdDeviation="6" result="blur" />
+                  <feComposite in="SourceGraphic" in2="blur" operator="over" />
+                </filter>
+                <filter id="keyDropShadow" x="-30%" y="-30%" width="160%" height="160%">
+                  <feDropShadow dx="0" dy="12" stdDeviation="10" flood-color="#000000" flood-opacity="0.65" />
+                  <feDropShadow dx="0" dy="2" stdDeviation="4" flood-color="#d4af37" flood-opacity="0.35" />
+                </filter>
+              </defs>
+
+              <g filter="url(#keyDropShadow)">
+                <!-- Classical Japandi Arch Key Head / Bow -->
+                <path d="M80 14 C48 14 26 36 26 70 C26 94 44 114 68 119 L68 126 L64 128 L64 134 L96 134 L96 128 L92 126 L92 119 C116 114 134 94 134 70 C134 36 112 14 80 14 Z" 
+                      fill="url(#goldKeyGradient)" stroke="url(#goldKeyHighlight)" stroke-width="2" />
+                
+                <!-- Inner Arch Cutout of Key Head -->
+                <path d="M80 28 C60 28 44 44 44 70 C44 88 58 103 76 106 L76 74 C76 71 84 71 84 74 L84 106 C102 103 116 88 116 70 C116 44 100 28 80 28 Z" 
+                      fill="#0d1f17" stroke="url(#goldKeyGradient)" stroke-width="1.5" />
+
+                <!-- Arch Silhouette House Motif Inside Bow -->
+                <path d="M80 38 L94 54 L66 54 Z" fill="url(#goldKeyGradient)" opacity="0.9" />
+                <rect x="70" y="54" width="20" height="24" rx="2" fill="url(#goldKeyGradient)" opacity="0.85" />
+                <path d="M76 78 L84 78 L84 66 C84 64 76 64 76 66 Z" fill="#0d1f17" />
+
+                <!-- Key Stem (Shaft) with Decorative Rings -->
+                <rect x="74" y="132" width="12" height="74" rx="2" fill="url(#goldKeyGradient)" stroke="url(#goldKeyDark)" stroke-width="0.8" />
+                <line x1="77" y1="134" x2="77" y2="204" stroke="#fff9e6" stroke-width="1.2" opacity="0.85" />
+                
+                <!-- Decorative Stem Rings / Ribs -->
+                <rect x="71" y="146" width="18" height="4" rx="2" fill="url(#goldKeyGradient)" stroke="url(#goldKeyDark)" stroke-width="0.6" />
+                <rect x="71" y="170" width="18" height="4" rx="2" fill="url(#goldKeyGradient)" stroke="url(#goldKeyDark)" stroke-width="0.6" />
+
+                <!-- Architectural Modern Teeth / Bit of the Key -->
+                <path d="M86 178 L114 178 L114 186 L102 186 L102 192 L112 192 L112 198 L98 198 L98 204 L86 204 Z" 
+                      fill="url(#goldKeyGradient)" stroke="url(#goldKeyDark)" stroke-width="0.8" />
+                <line x1="88" y1="180" x2="112" y2="180" stroke="#fff9e6" stroke-width="1" opacity="0.9" />
+                
+                <!-- Bottom Tip -->
+                <path d="M74 206 C74 210 86 210 86 206 Z" fill="url(#goldKeyGradient)" />
+              </g>
+
+              <!-- Starburst Glint Spark on Key Bow -->
+              <g class="fkey-sparkle" transform="translate(108, 38)">
+                <circle cx="0" cy="0" r="3" fill="#ffffff" filter="url(#goldKeyGlow)" />
+                <path d="M0 -12 L0 12 M-12 0 L12 0 M-6 -6 L6 6 M-6 6 L6 -6" stroke="#ffffff" stroke-width="1.6" stroke-linecap="round" />
+              </g>
+            </svg>
+          </div>
+
+          <div class="fkey-caption-box">
+            <span class="fkey-badge-tag">SEBUAH RASA PULANG</span>
+            <h3 class="fkey-main-title">Kunci Hunian Impian Anda</h3>
+            <p class="fkey-sub-text">
+              "Kunci siap diserahterimakan. Menghubungkan kenyamanan, kehangatan keluarga, dan rasa tenang di The Park Townhouse Sukoharjo..."
+            </p>
+            <button type="button" class="fkey-skip-btn" onclick="skipFloatingKeyToRoom7()">
+              <span>Lanjut ke Ruang Kunci &rarr;</span>
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- ================================================================
            DOOR CLOSING SEQUENCE OVERLAY (Animasi Pintu Tertutup Menuju Luar Rumah)
            ================================================================ -->
       <div class="door-closing-overlay" id="doorClosingOverlay" aria-hidden="true" style="display: none;">
@@ -1127,17 +1233,9 @@
                 <div class="door-interior-preview" style="background-image: url('assets/drive/dalam-6.png');"></div>
                 <div class="door-light-spill closing-light-spill" id="closingLightSpill"></div>
 
-                <!-- Double Doors Closing to Center -->
-                <div class="closing-leaf closing-leaf-left" id="closingLeafLeft">
-                  <div class="door-panel door-panel-upper"></div>
-                  <div class="door-panel door-panel-lower"></div>
-                  <div class="door-pull-bar"></div>
-                </div>
-                <div class="closing-leaf closing-leaf-right" id="closingLeafRight">
-                  <div class="door-panel door-panel-upper"></div>
-                  <div class="door-panel door-panel-lower"></div>
-                  <div class="door-pull-bar"></div>
-                </div>
+                <!-- Double Doors Closing to Center with 3D Golden Logo -->
+                <div class="closing-leaf closing-leaf-left" id="closingLeafLeft"></div>
+                <div class="closing-leaf closing-leaf-right" id="closingLeafRight"></div>
               </div>
             </div>
           </div>
@@ -5195,6 +5293,70 @@
             <span class="b-text">Fasilitas</span>
           </button>
         </nav>
+
+        <!-- Floating Quick Navigation Action Button (Return to Welcome / Tour) -->
+        <div class="floating-return-widget" id="floatingReturnWidget" style="display: none;">
+          <!-- Popover Menu -->
+          <div class="floating-return-menu" id="floatingReturnMenu" aria-hidden="true">
+            <div class="return-menu-header">
+              <span class="return-menu-title">NAVIGASI CEPAT</span>
+              <button class="return-menu-close" id="closeReturnMenuBtn" type="button" aria-label="Tutup menu">
+                <svg viewBox="0 0 24 24" width="13" height="13" fill="none" stroke="currentColor" stroke-width="2.2">
+                  <line x1="18" y1="6" x2="6" y2="18"></line>
+                  <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+              </button>
+            </div>
+            <button class="return-menu-item" id="btnReturnToWelcome" type="button">
+              <div class="menu-item-icon">
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M4 21V5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v16"></path>
+                  <path d="M9 21V10h6v11"></path>
+                  <circle cx="10" cy="15" r="1" fill="currentColor"></circle>
+                </svg>
+              </div>
+              <div class="menu-item-text">
+                <span class="item-title">Pintu Utama (Welcome)</span>
+                <span class="item-desc">Kembali ke animasi pintu emas The Park</span>
+              </div>
+            </button>
+            <button class="return-menu-item" id="btnReturnToTour" type="button">
+              <div class="menu-item-icon">
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+                  <polyline points="9 22 9 12 15 12 15 22"></polyline>
+                </svg>
+              </div>
+              <div class="menu-item-text">
+                <span class="item-title">Mulai Ulang Tur Rumah</span>
+                <span class="item-desc">Mulai dari Ruang 1 sebelum konfigurasi</span>
+              </div>
+            </button>
+            <button class="return-menu-item" id="btnReturnToBeranda" type="button">
+              <div class="menu-item-icon">
+                <svg viewBox="0 0 24 24" width="17" height="17" fill="none" stroke="currentColor" stroke-width="1.8">
+                  <rect x="3" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="3" width="7" height="7"></rect>
+                  <rect x="14" y="14" width="7" height="7"></rect>
+                  <rect x="3" y="14" width="7" height="7"></rect>
+                </svg>
+              </div>
+              <div class="menu-item-text">
+                <span class="item-title">Halaman Beranda</span>
+                <span class="item-desc">Katalog unit, 99 keunggulan &amp; fasilitas</span>
+              </div>
+            </button>
+          </div>
+
+          <!-- Floating Trigger Button (FAB) -->
+          <button class="floating-return-btn" id="floatingReturnBtn" type="button" title="Kembali ke Awal / Pintu Utama" aria-label="Kembali ke Awal">
+            <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2">
+              <path d="M3 12a9 9 0 1 0 3-6.7L3 8" />
+              <path d="M3 3v5h5" />
+            </svg>
+            <span class="floating-btn-label">Pintu Awal</span>
+          </button>
+        </div>
       </div>
 
       <!-- ================================================================

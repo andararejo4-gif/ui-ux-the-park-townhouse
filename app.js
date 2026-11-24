@@ -19,6 +19,7 @@ function checkHasSavedConfiguration() {
 function updateBottomBarVisibility() {
   const bottomBar = document.getElementById('landingBottomBar');
   const landingView = document.getElementById('landingPageView');
+  const returnWidget = document.getElementById('floatingReturnWidget');
   const isSaved = checkHasSavedConfiguration();
 
   if (isSaved) {
@@ -29,6 +30,9 @@ function updateBottomBarVisibility() {
     if (landingView) {
       landingView.classList.add('has-saved-config');
     }
+    if (returnWidget) {
+      returnWidget.classList.add('has-bottom-bar');
+    }
   } else {
     if (bottomBar) {
       bottomBar.classList.remove('is-visible');
@@ -37,7 +41,66 @@ function updateBottomBarVisibility() {
     if (landingView) {
       landingView.classList.remove('has-saved-config');
     }
+    if (returnWidget) {
+      returnWidget.classList.remove('has-bottom-bar');
+    }
   }
+}
+
+function markTourCompleted() {
+  try {
+    localStorage.setItem('theParkConfigCompleted', 'true');
+    localStorage.setItem('theParkConfigCompletedAt', new Date().toISOString());
+  } catch (_) { }
+
+  if (typeof fetch !== 'undefined') {
+    fetch('https://api.ipify.org?format=json')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ip) {
+          localStorage.setItem('theParkUserIp', data.ip);
+          localStorage.setItem('theParkConfigCompleted_' + data.ip, 'true');
+        }
+      })
+      .catch(() => { });
+  }
+}
+
+function checkIsTourCompleted() {
+  try {
+    if (localStorage.getItem('theParkConfigCompleted') === 'true') return true;
+    const ip = localStorage.getItem('theParkUserIp');
+    if (ip && localStorage.getItem('theParkConfigCompleted_' + ip) === 'true') return true;
+  } catch (_) { }
+  return false;
+}
+
+function directToBerandaOnLoad() {
+  const openingOverlay = document.getElementById('openingOverlay');
+  const appMain = document.getElementById('appMain');
+  const topHeader = document.querySelector('.top-header');
+  const landingPage = document.getElementById('landingPageView');
+  const returnWidget = document.getElementById('floatingReturnWidget');
+  const bottomBar = document.getElementById('landingBottomBar');
+
+  if (openingOverlay) {
+    openingOverlay.style.display = 'none';
+    openingOverlay.setAttribute('aria-hidden', 'true');
+    openingOverlay.setAttribute('data-stage', 'door-open');
+  }
+  if (appMain) appMain.style.display = 'none';
+  if (topHeader) topHeader.style.display = 'none';
+  if (landingPage) landingPage.style.display = 'flex';
+  if (bottomBar) {
+    bottomBar.style.display = 'grid';
+    bottomBar.classList.add('is-visible');
+  }
+  if (returnWidget) {
+    returnWidget.style.display = 'block';
+    returnWidget.classList.add('has-bottom-bar');
+  }
+
+  initLandingPage();
 }
 
 function saveCurrentConfigToStorage() {
@@ -549,10 +612,24 @@ function revealRoomStagger(roomNum = 1) {
 
 function finishOpening() {
   clearOpeningTimers();
-  openingOverlay.classList.add('is-entering-room');
-  openingOverlay.setAttribute('aria-hidden', 'true');
+  if (openingOverlay) {
+    openingOverlay.classList.add('is-entering-room');
+    openingOverlay.setAttribute('aria-hidden', 'true');
+    openingOverlay.style.opacity = '0';
+    openingOverlay.style.pointerEvents = 'none';
+    setTimeout(() => {
+      openingOverlay.style.display = 'none';
+      openingOverlay.style.visibility = 'hidden';
+    }, 700);
+  }
+
   revealRoomStagger(1);
   startHeroSparks();
+
+  const widget = document.getElementById('floatingReturnWidget');
+  if (widget) {
+    widget.style.display = 'block';
+  }
 
   setTimeout(() => {
     openingSparks.stop();
@@ -564,15 +641,44 @@ function prepareOpeningStandby() {
   openingSparks.stop();
   openingSparks.resize();
 
+  const widget = document.getElementById('floatingReturnWidget');
+  if (widget) {
+    widget.style.display = 'none';
+  }
+  if (typeof closeReturnMenu === 'function') {
+    closeReturnMenu();
+  }
+
+  const landingPage = document.getElementById('landingPageView');
+  if (landingPage) landingPage.style.display = 'none';
+
+  const bottomBar = document.getElementById('landingBottomBar');
+  if (bottomBar) bottomBar.style.display = 'none';
+
+  const appMain = document.getElementById('appMain');
+  if (appMain) appMain.style.display = 'flex';
+
+  const topHeader = document.querySelector('.top-header');
+  if (topHeader) topHeader.style.display = 'flex';
+
   phoneShell.classList.remove('app-entered');
   document.querySelectorAll('#room-1 .stagger-item').forEach((el) => {
     el.classList.remove('is-visible');
   });
 
-  openingOverlay.classList.remove('is-entering-room');
-  openingOverlay.setAttribute('aria-hidden', 'false');
-  openingOverlay.setAttribute('data-stage', 'waiting');
-  openingCaption.textContent = 'Setiap langkah jauh, selalu mencari jalan pulang…';
+  if (openingOverlay) {
+    openingOverlay.style.display = 'flex';
+    openingOverlay.style.opacity = '';
+    openingOverlay.style.visibility = '';
+    openingOverlay.style.pointerEvents = '';
+    openingOverlay.classList.remove('is-entering-room');
+    openingOverlay.setAttribute('aria-hidden', 'false');
+    openingOverlay.setAttribute('data-stage', 'waiting');
+  }
+
+  if (openingCaption) {
+    openingCaption.textContent = 'Setiap langkah jauh, selalu mencari jalan pulang…';
+  }
 
   const btnOpenDoor = document.getElementById('btnOpenDoor');
   if (btnOpenDoor) {
@@ -583,6 +689,11 @@ function prepareOpeningStandby() {
 }
 
 function startDoorOpeningSequence() {
+  if (!openingOverlay) return;
+  const currentStage = openingOverlay.getAttribute('data-stage');
+  if (currentStage === 'spark' || currentStage === 'door-open' || openingOverlay.classList.contains('is-entering-room')) {
+    return;
+  }
   clearOpeningTimers();
   const btnOpenDoor = document.getElementById('btnOpenDoor');
   if (btnOpenDoor) {
@@ -615,16 +726,164 @@ function runAfterDelayOpening() {
   prepareOpeningStandby();
 }
 
-document.getElementById('skipOpeningBtn').addEventListener('click', finishOpening);
-document.getElementById('replayOpeningBtn').addEventListener('click', () => {
-  goToRoomImmediate(1);
-  prepareOpeningStandby();
-});
+const skipOpeningBtn = document.getElementById('skipOpeningBtn');
+if (skipOpeningBtn) {
+  skipOpeningBtn.addEventListener('click', finishOpening);
+}
+
+const replayOpeningBtn = document.getElementById('replayOpeningBtn');
+if (replayOpeningBtn) {
+  replayOpeningBtn.addEventListener('click', () => {
+    goToRoomImmediate(1);
+    prepareOpeningStandby();
+  });
+}
 
 const openDoorBtnEl = document.getElementById('btnOpenDoor');
 if (openDoorBtnEl) {
   openDoorBtnEl.addEventListener('click', startDoorOpeningSequence);
 }
+
+if (openingOverlay) {
+  openingOverlay.addEventListener('click', () => {
+    startDoorOpeningSequence();
+  });
+  openingOverlay.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter' || e.key === ' ') {
+      e.preventDefault();
+      startDoorOpeningSequence();
+    }
+  });
+}
+
+/* --------------------------------------------------------------------------
+   FLOATING QUICK RETURN CONTROLLER (WELCOME SCREEN & TOUR NAVIGATION)
+   -------------------------------------------------------------------------- */
+const returnBtnEl = document.getElementById('floatingReturnBtn');
+const returnMenuEl = document.getElementById('floatingReturnMenu');
+const closeReturnMenuBtn = document.getElementById('closeReturnMenuBtn');
+const btnReturnToWelcome = document.getElementById('btnReturnToWelcome');
+const btnReturnToTour = document.getElementById('btnReturnToTour');
+
+function toggleReturnMenu() {
+  if (!returnMenuEl) return;
+  const isOpen = returnMenuEl.classList.toggle('is-open');
+  if (returnBtnEl) returnBtnEl.classList.toggle('is-active', isOpen);
+  returnMenuEl.setAttribute('aria-hidden', String(!isOpen));
+}
+
+function closeReturnMenu() {
+  if (!returnMenuEl) return;
+  returnMenuEl.classList.remove('is-open');
+  if (returnBtnEl) returnBtnEl.classList.remove('is-active');
+  returnMenuEl.setAttribute('aria-hidden', 'true');
+}
+
+function returnToWelcomePage() {
+  closeReturnMenu();
+  const landingPage = document.getElementById('landingPageView');
+  if (landingPage) landingPage.style.display = 'none';
+
+  const bottomBar = document.getElementById('landingBottomBar');
+  if (bottomBar) {
+    bottomBar.classList.remove('is-visible');
+    bottomBar.style.display = 'none';
+  }
+
+  const mainTour = document.getElementById('appMain');
+  if (mainTour) mainTour.style.display = 'flex';
+
+  const topHeader = document.querySelector('.top-header');
+  if (topHeader) topHeader.style.display = 'flex';
+
+  if (typeof closeQuickModal === 'function') closeQuickModal();
+  if (typeof closeSavedConfigModal === 'function') closeSavedConfigModal();
+
+  goToRoomImmediate(1);
+  prepareOpeningStandby();
+
+  const widget = document.getElementById('floatingReturnWidget');
+  if (widget) widget.style.display = 'none';
+}
+
+function returnToTourRoom1() {
+  closeReturnMenu();
+  const landingPage = document.getElementById('landingPageView');
+  if (landingPage) landingPage.style.display = 'none';
+
+  const bottomBar = document.getElementById('landingBottomBar');
+  if (bottomBar) {
+    bottomBar.classList.remove('is-visible');
+    bottomBar.style.display = 'none';
+  }
+
+  const mainTour = document.getElementById('appMain');
+  if (mainTour) mainTour.style.display = 'flex';
+
+  const topHeader = document.querySelector('.top-header');
+  if (topHeader) topHeader.style.display = 'flex';
+
+  if (typeof closeQuickModal === 'function') closeQuickModal();
+  if (typeof closeSavedConfigModal === 'function') closeSavedConfigModal();
+
+  if (openingOverlay) {
+    openingOverlay.classList.add('is-entering-room');
+    openingOverlay.setAttribute('aria-hidden', 'true');
+  }
+
+  goToRoomImmediate(1);
+  revealRoomStagger(1);
+  startHeroSparks();
+
+  const widget = document.getElementById('floatingReturnWidget');
+  if (widget) {
+    widget.style.display = 'block';
+    widget.classList.remove('has-bottom-bar');
+  }
+}
+
+if (returnBtnEl) {
+  returnBtnEl.addEventListener('click', (e) => {
+    e.stopPropagation();
+    toggleReturnMenu();
+  });
+}
+
+if (closeReturnMenuBtn) {
+  closeReturnMenuBtn.addEventListener('click', (e) => {
+    e.stopPropagation();
+    closeReturnMenu();
+  });
+}
+
+if (returnMenuEl) {
+  returnMenuEl.addEventListener('click', (e) => {
+    e.stopPropagation();
+  });
+}
+
+const btnReturnToBeranda = document.getElementById('btnReturnToBeranda');
+
+function returnToBerandaPage() {
+  closeReturnMenu();
+  finishTourAndExit();
+}
+
+if (btnReturnToWelcome) {
+  btnReturnToWelcome.addEventListener('click', returnToWelcomePage);
+}
+
+if (btnReturnToTour) {
+  btnReturnToTour.addEventListener('click', returnToTourRoom1);
+}
+
+if (btnReturnToBeranda) {
+  btnReturnToBeranda.addEventListener('click', returnToBerandaPage);
+}
+
+document.addEventListener('click', () => {
+  closeReturnMenu();
+});
 
 /* --------------------------------------------------------------------------
    4. PARALLAX HOUSE BACKGROUND & LAYERED ROOM TRANSITIONS
@@ -1044,6 +1303,17 @@ function checkUnlockProgress() {
   const nextBtn = document.getElementById('btnNextToRoom5');
   const lockedHint = document.getElementById('navHintLocked');
   const banner = document.getElementById('customSuccessBanner');
+  const siteplanCard = document.getElementById('siteplanCard');
+  const lockCurtain = document.getElementById('siteplanLockCurtain');
+
+  // Progressive blur lock for Site Plan section
+  if (hasSavedRoomCustomization) {
+    if (siteplanCard) siteplanCard.classList.remove('step-locked-blur');
+    if (lockCurtain) lockCurtain.classList.add('is-unlocked');
+  } else {
+    if (siteplanCard) siteplanCard.classList.add('step-locked-blur');
+    if (lockCurtain) lockCurtain.classList.remove('is-unlocked');
+  }
 
   if (hasSelectedSiteplanLot && hasSavedRoomCustomization) {
     if (nextBtn) {
@@ -1358,6 +1628,12 @@ function updateCustomizerTotal() {
 function saveRoomCustomization() {
   hasSavedRoomCustomization = true;
   saveCurrentConfigToStorage();
+
+  const siteplanCard = document.getElementById('siteplanCard');
+  const lockCurtain = document.getElementById('siteplanLockCurtain');
+  if (siteplanCard) siteplanCard.classList.remove('step-locked-blur');
+  if (lockCurtain) lockCurtain.classList.add('is-unlocked');
+
   const banner = document.getElementById('customSuccessBanner');
   if (banner) {
     banner.innerHTML = '<span>Desain ruangan tersimpan! Menggeser ke Site Plan untuk konfirmasi kavling...</span>';
@@ -1801,15 +2077,23 @@ function openQuickModal(type) {
    -------------------------------------------------------------------------- */
 function finishTourAndExit() {
   closeQuickModal();
+  markTourCompleted();
 
   const closingOverlay = document.getElementById('doorClosingOverlay');
   const landingPage = document.getElementById('landingPageView');
-  const mainTour = document.querySelector('.phone-screen > main');
-  const tourHeader = document.querySelector('.app-header');
+  const mainTour = document.getElementById('appMain');
+  const tourHeader = document.querySelector('.top-header');
 
   if (!closingOverlay) {
+    if (mainTour) mainTour.style.display = 'none';
+    if (tourHeader) tourHeader.style.display = 'none';
     if (landingPage) landingPage.style.display = 'flex';
     initLandingPage();
+    const returnWidget = document.getElementById('floatingReturnWidget');
+    if (returnWidget) {
+      returnWidget.style.display = 'block';
+      returnWidget.classList.add('has-bottom-bar');
+    }
     return;
   }
 
@@ -1831,6 +2115,11 @@ function finishTourAndExit() {
       landingPage.style.display = 'flex';
       initLandingPage();
     }
+    const returnWidget = document.getElementById('floatingReturnWidget');
+    if (returnWidget) {
+      returnWidget.style.display = 'block';
+      returnWidget.classList.add('has-bottom-bar');
+    }
 
     closingOverlay.style.opacity = '0';
     setTimeout(() => {
@@ -1842,8 +2131,8 @@ function finishTourAndExit() {
 
 function reopenStoryTour() {
   const landingPage = document.getElementById('landingPageView');
-  const mainTour = document.querySelector('.phone-screen > main');
-  const tourHeader = document.querySelector('.app-header');
+  const mainTour = document.getElementById('appMain');
+  const tourHeader = document.querySelector('.top-header');
   const savedModal = document.getElementById('savedConfigModal');
 
   if (savedModal) savedModal.style.display = 'none';
@@ -3125,7 +3414,7 @@ function closeQuickModal() {
 /* --------------------------------------------------------------------------
    LEAFLET RADIUS ANALYZER & INTERACTIVE MAP ENGINE
    -------------------------------------------------------------------------- */
-const SUKOHARJO_CENTER = [-7.6833, 110.8405];
+const SUKOHARJO_CENTER = [-7.6715895814403015, 110.84084957114858];
 
 const MAP_FACILITIES = [
   {
@@ -3236,7 +3525,7 @@ const MAP_CLUSTERS = [
     short: 'Nagoya',
     tag: 'Diamond',
     category: 'KLASTER THE PARK',
-    latLng: [-7.6835, 110.8480],
+    latLng: [-7.6738726546957565, 110.84397833605674],
     distance: 0.0,
     duration: 'Titik Hunian Utama',
     iconType: 'cluster',
@@ -3249,7 +3538,7 @@ const MAP_CLUSTERS = [
     short: 'Osaka',
     tag: 'Gold',
     category: 'KLASTER THE PARK',
-    latLng: [-7.6760, 110.8430],
+    latLng: [-7.670296745443235, 110.83933117795694],
     distance: 0.1,
     duration: 'Titik Hunian Utama',
     iconType: 'cluster',
@@ -3262,7 +3551,7 @@ const MAP_CLUSTERS = [
     short: 'Tokyo',
     tag: 'Emerald',
     category: 'KLASTER THE PARK',
-    latLng: [-7.6830, 110.8350],
+    latLng: [-7.670599344181913, 110.83923919943206],
     distance: 0.1,
     duration: 'Titik Hunian Utama',
     iconType: 'cluster',
@@ -4556,8 +4845,26 @@ window.addEventListener('DOMContentLoaded', () => {
   if (cardsCountLabel) cardsCountLabel.textContent = `${unlockedKeunggulanCount}/99`;
   initLandingNavbarScrollTrigger();
   initMetricsCounterAnimation();
-  setTimeout(initBerandaLeafletMap, 500);
-  runAfterDelayOpening();
+
+  // Check if tour was already completed (by local state or verified IP)
+  if (checkIsTourCompleted()) {
+    directToBerandaOnLoad();
+  } else {
+    setTimeout(initBerandaLeafletMap, 500);
+    runAfterDelayOpening();
+  }
+
+  // Update IP cache asynchronously if available
+  if (typeof fetch !== 'undefined') {
+    fetch('https://api.ipify.org?format=json')
+      .then((res) => res.json())
+      .then((data) => {
+        if (data && data.ip) {
+          localStorage.setItem('theParkUserIp', data.ip);
+        }
+      })
+      .catch(() => { });
+  }
 });
 
 
@@ -4701,13 +5008,13 @@ function focusBerandaCluster(clusterKey, btnEl) {
   if (!berandaLeafletMapInstance) return;
 
   if (clusterKey === 'nagoya') {
-    berandaLeafletMapInstance.flyTo([-7.6815, 110.8490], 15.5, { animate: true, duration: 0.6 });
+    berandaLeafletMapInstance.flyTo([-7.6738726546957565, 110.84397833605674], 16.5, { animate: true, duration: 0.6 });
   } else if (clusterKey === 'osaka') {
-    berandaLeafletMapInstance.flyTo([-7.6730, 110.8435], 15.5, { animate: true, duration: 0.6 });
+    berandaLeafletMapInstance.flyTo([-7.670296745443235, 110.83933117795694], 16.5, { animate: true, duration: 0.6 });
   } else if (clusterKey === 'tokyo') {
-    berandaLeafletMapInstance.flyTo([-7.6815, 110.8330], 15.5, { animate: true, duration: 0.6 });
+    berandaLeafletMapInstance.flyTo([-7.670599344181913, 110.83923919943206], 16.5, { animate: true, duration: 0.6 });
   } else {
-    berandaLeafletMapInstance.flyTo(SUKOHARJO_CENTER, 14.2, { animate: true, duration: 0.6 });
+    berandaLeafletMapInstance.flyTo(SUKOHARJO_CENTER, 14.8, { animate: true, duration: 0.6 });
   }
 }
 
@@ -5385,3 +5692,74 @@ function orderSuratCalculatedUnit() {
   const unitObj = SURAT_CALC_UNITS.find(u => u.id === currentSuratCalcUnit) || SURAT_CALC_UNITS[0];
   openOrderModal('Klaster ' + unitObj.cluster.toUpperCase(), unitObj.id, '498.278.753');
 }
+
+/* Responsive Window Resize Handler for Leaflet Maps */
+let mapResizeTimer = null;
+window.addEventListener('resize', () => {
+  clearTimeout(mapResizeTimer);
+  mapResizeTimer = setTimeout(() => {
+    if (typeof berandaLeafletMapInstance !== 'undefined' && berandaLeafletMapInstance) {
+      berandaLeafletMapInstance.invalidateSize();
+    }
+    if (typeof parkMap !== 'undefined' && parkMap) {
+      parkMap.invalidateSize();
+    }
+    if (typeof modalMap !== 'undefined' && modalMap) {
+      modalMap.invalidateSize();
+    }
+  }, 200);
+});
+
+/* ==========================================================================
+   FLOATING KEY ANIMATION (Transisi Menuju Ruang Kunci 07)
+   ========================================================================== */
+let floatingKeyTimer = null;
+
+function triggerFloatingKeyToRoom7() {
+  const overlay = document.getElementById('floatingKeyOverlay');
+  if (!overlay) {
+    goToRoom(7);
+    return;
+  }
+
+  clearTimeout(floatingKeyTimer);
+  overlay.style.display = 'flex';
+  void overlay.offsetWidth;
+  overlay.classList.remove('is-zooming-in');
+  overlay.classList.add('is-active');
+
+  // Efek percikan partikel alam / cahaya keemasan bila natureFX aktif
+  if (typeof natureFX !== 'undefined' && natureFX) {
+    natureFX.burstMotes(natureFX.width / 2, natureFX.height * 0.4, 30);
+  }
+
+  // Otomatis transisi menuju Ruang 07 setelah melayang sejenak
+  floatingKeyTimer = setTimeout(() => {
+    overlay.classList.add('is-zooming-in');
+    setTimeout(() => {
+      goToRoom(7);
+      overlay.classList.remove('is-active', 'is-zooming-in');
+      overlay.style.display = 'none';
+    }, 450);
+  }, 2600);
+}
+
+function skipFloatingKeyToRoom7() {
+  clearTimeout(floatingKeyTimer);
+  const overlay = document.getElementById('floatingKeyOverlay');
+  if (overlay) {
+    overlay.classList.add('is-zooming-in');
+    setTimeout(() => {
+      goToRoom(7);
+      overlay.classList.remove('is-active', 'is-zooming-in');
+      overlay.style.display = 'none';
+    }, 200);
+  } else {
+    goToRoom(7);
+  }
+}
+
+
+
+
+
