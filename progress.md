@@ -6144,3 +6144,16 @@
     - Styled `.showcase-action-cell` as full-width interactive action banner at the bottom with warm cream background (`#faf6ee`), hairline divider (`#f0eae1`), rounded 9px corners, golden arrow badge, and distinct `Semua Unit` with micro-tag `KATALOG UNIT`.
 - **Status**: Completed & Verified.
 
+
+---
+
+### [2026-11-24] Progress #140: Fix Social Media Link Pills Layout Overflow and Truncation
+- **Context & Objective**: Per user request ("biat agar ga error") referencing `media_1795507794739_3fe12bf4.png`, resolve layout defect where the TikTok, Facebook, and YouTube social pills suffered from column blowout, rigid fixed heights, clipping, and text wrapping collisions.
+- **Key Changes Implemented**:
+  - **Overflow-Proof Grid Geometry (`styles.css`)**:
+    - Changed `.social-links-grid` column definition to `grid-template-columns: repeat(2, minmax(0, 1fr)) !important;` with `width: 100% !important; box-sizing: border-box !important;`, preventing column blowout beyond the container.
+    - Replaced fixed rigid `height: 32px !important` with flexible `min-height: 40px !important` and balanced padding (`6px 10px`), `min-width: 0 !important`, and `gap: 6px !important`.
+  - **Typography & Handle Balancing (`styles.css`, `index.html`)**:
+    - Standardized YouTube handle from verbose `The Park Townhouse Official` to consistent standard handle `@theparktownhouse` matching TikTok and Instagram.
+    - Applied `overflow: hidden; text-overflow: ellipsis; white-space: nowrap;` on `.social-name` and `.social-handle` to guarantee zero border collisions or horizontal leaks across small screens.
+- **Status**: Completed & Verified.
