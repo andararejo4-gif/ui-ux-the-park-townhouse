@@ -1823,19 +1823,20 @@ function finishTourAndExit() {
     closingOverlay.classList.add('is-pulling-back');
   }, 1200);
 
-  // After 2.6s, smoothly reveal the Landing Page!
+  // After 2.6s, switch underlying view to Landing Page while overlay is fully opaque, then fade out
   setTimeout(() => {
+    if (mainTour) mainTour.style.display = 'none';
+    if (tourHeader) tourHeader.style.display = 'none';
+    if (landingPage) {
+      landingPage.style.display = 'flex';
+      initLandingPage();
+    }
+
     closingOverlay.style.opacity = '0';
     setTimeout(() => {
       closingOverlay.style.display = 'none';
       closingOverlay.classList.remove('is-shutting', 'is-pulling-back');
-      if (mainTour) mainTour.style.display = 'none';
-      if (tourHeader) tourHeader.style.display = 'none';
-      if (landingPage) {
-        landingPage.style.display = 'flex';
-        initLandingPage();
-      }
-    }, 550);
+    }, 600);
   }, 2600);
 }
 

@@ -6002,3 +6002,17 @@
     - Maintained active tab solid white pill state (`background: #ffffff; color: #11332a; font-weight: 700;`) and soft ivory inactive state (`color: rgba(245, 242, 235, 0.85)`).
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #130: Fix Door Closing Transition Glitch (Ruang Kunci Flash)
+- **Context & Objective**: Resolve issue where Room 07 ("Ruang Kunci") briefly reappeared after the door-closing animation before transitioning to the Landing Page.
+- **Root Cause**:
+  - In `finishTourAndExit()`, `closingOverlay.style.opacity = '0'` was called 550ms before hiding `mainTour` and displaying `landingPage`. As the closing overlay faded to transparent, Room 07 directly behind it became visible for 550ms before suddenly snapping to Beranda.
+- **Key Changes Implemented (`app.js`)**:
+  - Restructured transition sequence in `finishTourAndExit()`:
+    1. At 2600ms, while `doorClosingOverlay` is still 100% opaque, immediately set `mainTour.style.display = 'none'`, `tourHeader.style.display = 'none'`, and mount/show `landingPage.style.display = 'flex'`.
+    2. Then smoothly fade out `closingOverlay.style.opacity = '0'` over 600ms directly revealing the Landing Page without exposing the previous room.
+    3. Remove overlay from flow on complete (`closingOverlay.style.display = 'none'`).
+- **Status**: Completed & Verified.
+
+
