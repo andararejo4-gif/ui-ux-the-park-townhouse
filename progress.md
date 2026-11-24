@@ -6069,3 +6069,20 @@
     - Balanced spacing (`margin-left: 6px; font-size: 11px;`) ensuring crisp alignment and uniform vertical heights across both rows.
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #135: Eliminate Text Truncation in Showcase Summary Bar (Symmetrical 3x2 Grid)
+- **Context & Objective**: Per user screenshot (`media_1795505959963_b55a355d.png`), resolve truncated ellipses (`UNIT TER...`, `KAMAR T...`, `Lihat Sem...`) caused by unbalanced column widths (`0.95fr 1.15fr 1.25fr`), oversized icon boxes (28x28px), and elongated text strings.
+- **Key Changes Implemented**:
+  - **Symmetrical 3-Column Auto-Layout (`styles.css`)**:
+    - Replaced uneven column ratios with balanced `repeat(3, 1fr) !important;` (`repeat(6, 1fr)` on desktop).
+    - Reduced padding from `12px 14px` to `10px 10px` and column gap to `6px`, expanding available inline space per cell by ~15-20px.
+    - Optimized icon badges from 28x28px to 24x24px with 13px SVG icons and tighter `gap: 5px`, recovering critical horizontal width for textual contents.
+    - Adjusted typography (`strong` at 10.5px, `span` at 8px with `letter-spacing: 0.01em`) so full words render cleanly without overflowing or truncation.
+  - **Concise Architectural Nomenclature (`index.html`, `app.js`)**:
+    - Updated availability label from verbose `14` / `UNIT TERSEDIA` to clear `14 Unit` / `TERSEDIA`.
+    - Compacted CTA action cell from `Lihat Semua 15` / `KATALOG UNIT` to punchy `Lihat Semua` / `KATALOG UNIT`.
+    - Synchronized dynamic cluster updater in `switchBerandaShowcaseCluster()` (`app.js`) to render `${data.avail} Unit` and `Lihat Semua` across all clusters (Nagoya, Tokyo, Osaka).
+- **Status**: Completed & Verified.
+
+

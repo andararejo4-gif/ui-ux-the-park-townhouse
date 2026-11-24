@@ -2025,12 +2025,12 @@ function switchBerandaShowcaseCluster(clusterKey, btnEl) {
   const statBaths = document.getElementById('showcaseStatBaths');
   const seeAllLbl = document.getElementById('showcaseSeeAllLabel');
 
-  if (statAvail) statAvail.textContent = data.avail;
+  if (statAvail) statAvail.textContent = `${data.avail} Unit`;
   if (statLb) statLb.textContent = data.lb;
   if (statLt) statLt.textContent = data.lt;
   if (statBeds) statBeds.textContent = data.beds;
   if (statBaths) statBaths.textContent = data.baths;
-  if (seeAllLbl) seeAllLbl.textContent = `Lihat Semua ${data.total}`;
+  if (seeAllLbl) seeAllLbl.textContent = 'Lihat Semua';
 
   const carousel = document.getElementById('berandaUnitsCarousel');
   if (carousel) {
