@@ -6044,6 +6044,18 @@
     - Integrated clean WhatsApp and calculator SVG icons into secondary CTA buttons across all Fasilitas subpages.
 - **Status**: Completed & Verified.
 
+---
+
+### [2026-11-24] Progress #133: Compact Typography Scaling for Ruang Peta & Radius Analysis
+- **Context & Objective**: Per user request ("buat agar lebih kecil tulisannya") for `#secLokasiRadius`, scale down oversized headlines, category labels, distance chips, and controls into a compact, refined typographic hierarchy.
+- **Key Changes Implemented (`styles.css`)**:
+  - **Radius Analysis Card Header**: Scaled `.analysis-facilities-headline` down from 16.5px to 13.5px; `.analysis-label-eyebrow` from 11px to 9.5px; `.analysis-active-badge` from 11.5px to 10px.
+  - **Interactive Facility Categories**: Scaled `.analysis-cat-btn` from 12px / 40px height to 10.5px / 32px height with tighter padding (`6px 9px`), 13px SVG icons, and 9.5px count pills.
+  - **Radius & Cluster Filter Buttons**: Scaled `.analysis-radius-btn` and `.analysis-cluster-btn` from 13px / 38px height to 11px / 32px height (`gap: 6px`).
+  - **Section Headings & Chips**: Scoped `#secLokasiRadius .section-card-title` to 15-17px, subtitle to 11px, `.dist-chip` to 10-10.5px with 4px vertical padding, and action buttons to 10.5px.
+- **Status**: Completed & Verified.
+
+
 
 
 

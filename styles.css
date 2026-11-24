@@ -11262,15 +11262,51 @@ body {
 /* ==========================================================================
    BERANDA RADIUS ANALYSIS & LEAFLET MAP (IMAGE 1 & IMAGE 6 SPEC)
    ========================================================================== */
+/* ==========================================================================
+   BERANDA RADIUS ANALYSIS & LEAFLET MAP (IMAGE 1 & IMAGE 6 SPEC)
+   ========================================================================== */
+#secLokasiRadius .section-card-title {
+  font-size: clamp(15px, 3.2vw, 17px) !important;
+  line-height: 1.3 !important;
+}
+
+#secLokasiRadius .section-card-sub {
+  font-size: 11px !important;
+  line-height: 1.45 !important;
+}
+
+#secLokasiRadius .dist-chip {
+  font-size: 10px !important;
+  padding: 4px 8px !important;
+  min-width: 78px !important;
+}
+
+#secLokasiRadius .dist-chip strong {
+  font-size: 10.5px !important;
+}
+
+#secLokasiRadius .map-scroll-hint-pill {
+  font-size: 9px !important;
+  padding: 3px 8px !important;
+}
+
+#secLokasiRadius .map-actions-row .btn-secondary-link,
+#secLokasiRadius .map-actions-row .btn-primary-forest {
+  font-size: 10.5px !important;
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0 10px !important;
+}
+
 .beranda-radius-analysis-card {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 16px;
-  padding: 16px;
+  border-radius: 14px;
+  padding: 12px 14px;
   display: flex;
   flex-direction: column;
   box-shadow: 0 2px 10px rgba(17, 51, 42, 0.04);
-  margin-top: 14px;
+  margin-top: 12px;
   margin-bottom: 4px;
   box-sizing: border-box;
   width: 100%;
@@ -11280,12 +11316,12 @@ body {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 6px;
+  margin-bottom: 4px;
 }
 
 .analysis-label-eyebrow {
   font-family: var(--font-sans);
-  font-size: 11px;
+  font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.06em;
   color: #2e7d32;
@@ -11294,18 +11330,18 @@ body {
 
 .analysis-active-badge {
   font-family: var(--font-sans);
-  font-size: 11.5px;
+  font-size: 10px;
   font-weight: 700;
   color: #11332a;
   background: #c6f68d;
-  padding: 3px 12px;
+  padding: 2px 8px;
   border-radius: 999px;
   box-sizing: border-box;
 }
 
 .analysis-facilities-headline {
   font-family: var(--font-sans);
-  font-size: 16.5px;
+  font-size: 13.5px;
   font-weight: 700;
   color: #11332a;
   margin: 0;
@@ -11315,11 +11351,11 @@ body {
 .analysis-hr {
   height: 1px;
   background: #f1f3f1;
-  margin: 12px 0 14px;
+  margin: 10px 0 12px;
 }
 
 .analysis-section-block {
-  margin-bottom: 14px;
+  margin-bottom: 11px;
 }
 
 .analysis-section-block:last-child {
@@ -11328,12 +11364,12 @@ body {
 
 .analysis-group-title {
   font-family: var(--font-sans);
-  font-size: 10.5px;
+  font-size: 9.5px;
   font-weight: 700;
   letter-spacing: 0.05em;
   color: #4b5563;
   text-transform: uppercase;
-  margin-bottom: 8px;
+  margin-bottom: 6px;
   display: block;
 }
 
@@ -11341,21 +11377,21 @@ body {
 .analysis-categories-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 6px;
 }
 
 .analysis-cat-btn {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 9px 12px;
+  border-radius: 10px;
+  padding: 6px 9px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   cursor: pointer;
   transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
   box-sizing: border-box;
-  min-height: 40px;
+  min-height: 32px;
   color: #11332a;
   font-family: var(--font-sans);
 }
@@ -11363,23 +11399,25 @@ body {
 .analysis-cat-btn .acb-left {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  gap: 6px;
+  font-size: 10.5px;
   font-weight: 600;
   color: inherit;
 }
 
 .analysis-cat-btn .acb-left svg {
+  width: 13px;
+  height: 13px;
   flex-shrink: 0;
 }
 
 .analysis-cat-btn .acb-count {
   background: #f3f4f6;
   color: #4b5563;
-  font-size: 11px;
+  font-size: 9.5px;
   font-weight: 600;
   border-radius: 999px;
-  padding: 2px 8px;
+  padding: 1px 6px;
   min-width: 14px;
   text-align: center;
   transition: all 0.2s ease;
@@ -11405,16 +11443,16 @@ body {
 .analysis-radius-grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 8px;
+  gap: 6px;
 }
 
 .analysis-radius-btn {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  height: 38px;
+  border-radius: 9px;
+  height: 32px;
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   color: #11332a;
   cursor: pointer;
@@ -11437,12 +11475,12 @@ body {
 }
 
 .analysis-more-toggle-btn {
-  margin-top: 8px;
+  margin-top: 6px;
   width: 100%;
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  padding: 9px 12px;
+  border-radius: 10px;
+  padding: 6px 10px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -11460,8 +11498,8 @@ body {
 .analysis-more-toggle-btn .amt-left {
   display: flex;
   align-items: center;
-  gap: 8px;
-  font-size: 12px;
+  gap: 6px;
+  font-size: 10.5px;
   font-weight: 600;
   color: #2e7d32;
 }
@@ -11470,9 +11508,9 @@ body {
   background: #f3f4f6;
   border: 1px solid #e5e7eb;
   color: #4b5563;
-  font-size: 11px;
+  font-size: 9.5px;
   font-weight: 500;
-  padding: 2px 10px;
+  padding: 2px 8px;
   border-radius: 999px;
 }
 
@@ -11480,16 +11518,16 @@ body {
 .analysis-cluster-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 8px;
+  gap: 6px;
 }
 
 .analysis-cluster-btn {
   background: #ffffff;
   border: 1px solid #e5e7eb;
-  border-radius: 12px;
-  height: 38px;
+  border-radius: 9px;
+  height: 32px;
   font-family: var(--font-sans);
-  font-size: 13px;
+  font-size: 11px;
   font-weight: 600;
   color: #11332a;
   cursor: pointer;
